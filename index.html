@@ -3,246 +3,180 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TieuPhu — Airdrop • MMO • Crypto</title>
-  <meta name="description" content="Trang cá nhân TieuPhu | Airdrop • MMO • Proxy • Crypto News" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>TieuPhu | Airdrop • MMO • On-chain</title>
+  <meta name="description" content="TieuPhu — airdrop, tool, proxy và cập nhật crypto." />
+  <link rel="preconnect" href="https://api.coingecko.com" crossorigin>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- ===== NAVBAR ===== -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#">
-        <span class="logo">TP</span>
-        <span class="brand-text">TieuPhu</span>
-      </a>
-      <nav class="menu">
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#"><span>TP</span> TieuPhu</a>
+      <nav class="nav-links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#news">News</a>
-        <a href="#proxy">Proxy</a>
-        <a href="#contact">Liên hệ</a>
-        <a href="about.html" class="btn ghost sm">About page</a>
+        <a href="about.html" class="btn btn-primary">About page</a>
       </nav>
-      <button class="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="container hero-inner">
+    <div class="container hero-wrap">
       <div class="hero-left">
-        <div class="pill">Airdrop • MMO • On-chain</div>
-        <h1>Hello <span class="gradient">Programmer</span>, I'm <span class="accent">TieuPhu</span></h1>
-        <p class="muted">“Do your best – Play hard – Keep improving.”
-          Đam mê công nghệ, tối ưu hoá công việc và kiếm tiền online: airdrop, tool, proxy và cập nhật crypto.
+        <h1>Hello Programmer, I'm TieuPhu</h1>
+        <p class="muted">
+          “Do your best – Play hard – Keep improving.” Mình đam mê công nghệ, tối ưu hoá công việc và kiếm tiền online.
+          Ở đây bạn sẽ tìm thấy thông tin airdrop, tool, proxy và cập nhật crypto.
         </p>
         <div class="cta-row">
-          <a class="btn" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
-          <a class="btn ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
+          <a class="btn-outline" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn-outline" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn-outline" href="mailto:nongdancryptos@gmail.com">Email</a>
         </div>
       </div>
       <div class="hero-right">
-        <img src="https://github.com/nongdancryptos/nongdancryptos/blob/main/images/Developer.gif?raw=true" alt="Developer" />
+        <img class="hero-ill" alt="dev" src="https://github.com/nongdancryptos/nongdancryptos/raw/main/images/Developer.gif">
       </div>
-    </div>
-    <!-- ===== LIVE TICKER: Top 20 ===== -->
-    <div class="ticker-wrap">
-      <div id="ticker" class="ticker"></div>
     </div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
+  <!-- Ticker -->
+  <section class="ticker">
+    <div class="container">
+      <div id="tickerRow" class="ticker-row" aria-live="polite">Đang tải giá crypto…</div>
+    </div>
+  </section>
+
+  <!-- About -->
   <section id="about" class="section">
     <div class="container">
-      <header class="section-head">
+      <header class="sec-head">
         <h2>About Me</h2>
-        <p class="muted">Tổng hợp profile ngắn & một phần portfolio.</p>
+        <p class="muted">Tổng hợp profile, liên hệ và một phần portfolio.</p>
       </header>
 
-      <div class="grid g-2">
+      <div class="grid-2">
         <div class="card glass">
           <h3>Giới thiệu nhanh</h3>
-          <ul class="list">
+          <ul class="bullet">
             <li>👋 Mình là <b>TieuPhu</b>, thích khám phá cái mới & tối ưu hiệu quả.</li>
-            <li>🔍 Quan tâm: công nghệ, airdrop, bot/script, MMO.</li>
-            <li>🚀 Châm ngôn: “Do your best – Play hard – Keep improving.”</li>
+            <li>🔎 Quan tâm: công nghệ, airdrop, bot/script, MMO.</li>
+            <li>🎯 Châm ngôn: “Do your best – Play hard – Keep improving.”</li>
           </ul>
-          <div class="chips">
-            <span class="chip">Airdrop</span>
-            <span class="chip">Automation</span>
-            <span class="chip">On-chain</span>
-            <span class="chip">Web Scraping</span>
-            <span class="chip">Security</span>
-          </div>
+          <p class="muted small">Airdrop • Automation • On-chain • Web Scraping • Security</p>
         </div>
 
-        <div class="card glass">
-          <h3>Hỗ trợ & Donation</h3>
-          <p class="muted">Nếu thấy nội dung hữu ích, bạn có thể ủng hộ để mình duy trì các dự án open-source.</p>
-          <div class="support">
-            <a class="btn sm" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">☕ PayPal</a>
-            <a class="btn sm ghost" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+        <div id="skills" class="card glass">
+          <h3>Stack nhanh</h3>
+          <div class="chip-row">
+            <span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">JS/TS</span>
+            <span class="chip">Web Scraping</span><span class="chip">Automation</span><span class="chip">On-chain</span>
+          </div>
+          <div class="support-row" style="margin-top:.75rem">
+            <a class="btn-pill kofi" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">☕ Ko-fi</a>
+            <a class="btn-pill paypal" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">💙 PayPal</a>
+            <a class="btn-pill crypto" href="#donate" onclick="document.getElementById('donate-modal').showModal()">₿ Crypto</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SKILLS ===== -->
-  <section id="skills" class="section">
+  <!-- Proxy short promo -->
+  <section class="section" id="proxy">
     <div class="container">
-      <header class="section-head">
-        <h2>Skills & Tech</h2>
-        <p class="muted">Một vài công nghệ mình thường dùng / đang mở rộng.</p>
-      </header>
-
-      <div class="grid g-3">
-        <div class="card glass">
-          <h3>Ngôn ngữ</h3>
-          <p>Python, JavaScript/TypeScript, Node.js, PHP, Go, Bash</p>
+      <div class="card promo">
+        <div>
+          <h3>Proxy bảo mật cho tool & airdrop</h3>
+          <p class="muted">Cần proxy ổn định cho auto/check-in/claim? Thử <b>proxysieure.com</b> — nhiều gói, giá hợp lý, uptime cao.</p>
         </div>
-        <div class="card glass">
-          <h3>Quan tâm</h3>
-          <p>Blockchain, Web Scraping, Ethical Hacking, Bot/Script, MMO</p>
-        </div>
-        <div class="card glass">
-          <h3>Đang học thêm</h3>
-          <p>C/C++, C#, Rust, Java</p>
-        </div>
+        <a href="https://proxysieure.com" target="_blank" rel="noopener" class="btn btn-primary">Mua proxy tại proxysieure.com</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== CRYPTO NEWS ===== -->
+  <!-- Crypto News -->
   <section id="news" class="section">
     <div class="container">
-      <header class="section-head">
+      <header class="sec-head">
         <h2>Crypto News</h2>
         <p class="muted">Tin nhanh về thị trường, dự án, hệ sinh thái.</p>
       </header>
 
-      <div id="news-list" class="news-grid">
-        <!-- News cards will be injected here -->
+      <div id="newsList" class="news-grid">
+        <div class="card glass muted" id="newsEmpty">Không tải được tin tức. Thử lại sau.</div>
       </div>
-      <div class="center mt">
-        <button id="reload-news" class="btn ghost sm">Tải lại tin</button>
+
+      <div class="center">
+        <button id="btnReloadNews" class="btn-outline small">Tải lại tin</button>
       </div>
     </div>
   </section>
 
-  <!-- ===== PROXY CTA (ngắn gọn, nằm trước phần Liên hệ) ===== -->
-  <section id="proxy" class="section">
+  <!-- Contact (last section) -->
+  <section id="contact" class="section contact">
     <div class="container">
-      <div class="card glass">
-        <div class="proxy-row">
-          <div>
-            <h2 class="m0">proxysieure.com</h2>
-            <p class="muted m0">Proxy sạch cho Airdrop & Automation — Rotating / Static, đa GEO, uptime cao.</p>
-            <ul class="list compact">
-              <li>IP sạch, tỉ lệ pass cao khi claim/task</li>
-              <li>Rotating theo thời gian / requests hoặc giữ IP cố định</li>
-              <li>Dashboard & API quản lý nhanh</li>
-            </ul>
+      <header class="sec-head">
+        <h2>Liên hệ & Ủng hộ</h2>
+        <p class="muted">Kết nối nhanh với mình, hoặc mời mình 1 ly ☕ nếu bạn thấy hữu ích.</p>
+      </header>
+
+      <div class="contact-wrap">
+        <div class="card glass contact-card">
+          <h3>Social</h3>
+          <div class="social-grid">
+            <a class="btn-social tg" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M9.0 14.8l-.3 4.3c.4 0 .6-.2.9-.4l2.1-1.9 4.4 3.2c.8.4 1.4.2 1.6-.7l2.9-13.6c.3-1.2-.4-1.7-1.2-1.4L2.8 10.1c-1.2.5-1.2 1.2-.2 1.5l4.2 1.3 9.8-6.2c.5-.3.9-.1.5.2"/></svg>
+              Telegram
+            </a>
+            <a class="btn-social x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M18.2 2H21l-6.5 7.5L22 22h-6.8l-4.3-5.6L5.9 22H3l7-8.1L2 2h6.9l3.9 5.1L18.2 2zM8.2 4H5.4l10.6 14h2.8L8.2 4z"/></svg>
+              X (Twitter)
+            </a>
+            <a class="btn-social gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.2-1.5 3.2-1.2 3.2-1.2.7 1.7.2 3 .1 3.3.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a class="btn-social mail" href="mailto:nongdancryptos@gmail.com">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
+              Email
+            </a>
           </div>
-          <a class="btn" href="https://proxysieure.com" target="_blank" rel="noopener">Mua Proxy ngay</a>
         </div>
-      </div>
-    </div>
-  </section>
 
- <!-- CONTACT -->
-<section id="contact" class="section contact">
-  <div class="container">
-    <header class="sec-head">
-      <h2>Liên hệ & Ủng hộ</h2>
-      <p class="muted">Kết nối nhanh với mình, hoặc mời mình 1 ly ☕ nếu bạn thấy hữu ích.</p>
-    </header>
-
-    <div class="contact-wrap">
-      <!-- Social links -->
-      <div class="card glass contact-card">
-        <h3>Social</h3>
-        <div class="social-grid">
-          <a class="btn-social tg" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.0 14.8l-.3 4.3c.4 0 .6-.2.9-.4l2.1-1.9 4.4 3.2c.8.4 1.4.2 1.6-.7l2.9-13.6c.3-1.2-.4-1.7-1.2-1.4L2.8 10.1c-1.2.5-1.2 1.2-.2 1.5l4.2 1.3 9.8-6.2c.5-.3.9-.1.5.2"/></svg>
-            Telegram
-          </a>
-          <a class="btn-social x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2H21l-6.5 7.5L22 22h-6.8l-4.3-5.6L5.9 22H3l7-8.1L2 2h6.9l3.9 5.1L18.2 2zM8.2 4H5.4l10.6 14h2.8L8.2 4z"/></svg>
-            X (Twitter)
-          </a>
-          <a class="btn-social gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.2-1.5 3.2-1.2 3.2-1.2.7 1.7.2 3 .1 3.3.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-            GitHub
-          </a>
-          <a class="btn-social mail" href="mailto:nongdancryptos@gmail.com">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
-            Email
-          </a>
-        </div>
-      </div>
-
-      <!-- Support -->
-      <div class="card glass contact-card">
-        <h3>Ủng hộ</h3>
-        <p class="muted">Nếu thấy hữu ích, bạn có thể ủng hộ mình để duy trì nội dung và công cụ.</p>
-        <div class="support-row">
-          <a class="btn-pill kofi" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">☕ Ko-fi</a>
-          <a class="btn-pill paypal" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">💙 PayPal</a>
-          <a class="btn-pill crypto" href="#donate" onclick="document.getElementById('donate-modal').showModal()">₿ Crypto</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal donate ngắn gọn -->
-    <dialog id="donate-modal" class="donate-modal">
-      <form method="dialog" class="modal-card">
-        <h3>Ủng hộ bằng Crypto</h3>
-        <ul class="wallets">
-          <li><b>ETH / POL</b>: 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
-          <li><b>BTC</b>: bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
-          <li><b>SOL</b>: 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
-        </ul>
-        <div class="modal-actions">
-          <button class="btn-pill" value="close">Đóng</button>
-        </div>
-      </form>
-    </dialog>
-  </div>
-</section>
+        <div class="card glass contact-card">
           <h3>Ủng hộ</h3>
-          <div class="support">
-            <a class="btn sm" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">☕ PayPal</a>
-            <a class="btn sm ghost" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+          <p class="muted">Nếu thấy hữu ích, bạn có thể ủng hộ mình để duy trì nội dung và công cụ.</p>
+          <div class="support-row">
+            <a class="btn-pill kofi" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">☕ Ko-fi</a>
+            <a class="btn-pill paypal" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">💙 PayPal</a>
+            <a class="btn-pill crypto" href="#donate" onclick="document.getElementById('donate-modal').showModal()">₿ Crypto</a>
           </div>
         </div>
       </div>
+
+      <!-- modal donate -->
+      <dialog id="donate-modal" class="donate-modal">
+        <form method="dialog" class="modal-card">
+          <h3>Ủng hộ bằng Crypto</h3>
+          <ul class="wallets">
+            <li><b>ETH / POL</b>: 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
+            <li><b>BTC</b>: bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
+            <li><b>SOL</b>: 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
+          </ul>
+          <div class="modal-actions">
+            <button class="btn-pill" value="close">Đóng</button>
+          </div>
+        </form>
+      </dialog>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="container f-inner">
-      <div class="brand-row">
-        <span class="logo">TP</span>
-        <strong>TieuPhu</strong>
-      </div>
-      <nav class="f-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#news">News</a>
-        <a href="#proxy">Proxy</a>
-        <a href="#contact">Liên hệ</a>
-        <a href="about.html">About page</a>
-      </nav>
-      <p class="muted">© <span id="y"></span> TieuPhu — Made with 💻 & ☕</p>
-    </div>
+    <div class="container small muted">© <span id="y"></span> TieuPhu • Airdrop • MMO • On-chain</div>
   </footer>
 
   <script src="app.js"></script>

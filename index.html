@@ -1,228 +1,181 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TieuPhu • Portfolio</title>
-  <meta name="description" content="TieuPhu – Make Money Online • Tech • Stats • Links" />
+  <title>TieuPhu — Modern Portfolio</title>
+  <meta name="description" content="TieuPhu • MMO • Tech • Portfolio" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Tourney:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0f17;
-      --panel: #0f1724;
-      --text: #e6efff;
-      --muted: #90a3c1;
-      --brand: #f74609;
-      --accent: #00e5ff;
-      --card: #0e1320;
-      --ring: 0 0 0 2px rgba(0,229,255,.2), 0 0 40px rgba(0,229,255,.12) inset;
+    :root{
+      --bg: #0b0f14; --panel:#0e121b; --card:#121826; --muted:#9fb0c7; --text:#e9f0ff;
+      --brand:#7c3aed; --brand-2:#22d3ee; --ring: 0 0 0 1px rgba(255,255,255,.06), 0 10px 30px rgba(124,58,237,.25);
     }
+    [data-theme="light"]{ --bg:#f7f9fc; --panel:#ffffff; --card:#ffffff; --text:#0e1320; --muted:#54637a }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;background:radial-gradient(1200px 800px at 80% -20%, rgba(247,70,9,.12), transparent 60%),
-      radial-gradient(1000px 800px at -10% 120%, rgba(0,229,255,.10), transparent 60%), var(--bg);
-      color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    a{color:inherit}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:20px; box-shadow: var(--ring);}
-    .hero{display:grid;place-items:center;text-align:center;padding:36px 18px}
-    .hero .gif{filter:drop-shadow(0 10px 30px rgba(247,70,9,.25));}
-    .title{font-family:Tourney, Inter, sans-serif; font-weight:900; font-size:clamp(28px, 6vw, 52px); letter-spacing:1px; margin:16px 0}
-    .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .divider{height:20px;background:url('https://i.imgur.com/dBaSKWF.gif') center/contain no-repeat;margin:18px 0}
-    .section{padding:28px}
-    .section h2{margin:0 0 14px;font-size:22px}
-    .grid-2{display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
-    .panel{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px}
-    .subtle{color:var(--muted)}
-    .stats{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
-    .stats a img{border-radius:12px; border:1px solid rgba(255,255,255,.06)}
-    .links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .support-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px}
-    .support-grid .tile{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;text-align:center}
-    .qr{max-width:170px; border-radius:12px; border:1px solid rgba(255,255,255,.12)}
-    footer{padding:32px 12px;text-align:center;color:var(--muted)}
-    .marquee{width:100%; overflow:hidden; border-radius:16px; border:1px solid rgba(255,255,255,.08)}
-    .img-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .img-row img{max-width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.03)}
-    .kbd{font:600 12px/1 Inter, monospace; padding:.2em .45em; border:1px solid rgba(255,255,255,.2); border-radius:6px; background:rgba(0,0,0,.4)}
-    .glow{box-shadow:0 0 0 1px rgba(247,70,9,.35), 0 0 30px rgba(247,70,9,.25) inset}
-    .floating{animation:float 6s ease-in-out infinite}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    body{margin:0;font-family:Manrope,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--text); background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.08); border-radius:20px; box-shadow:var(--ring)}
+    .hero{position:relative; overflow:hidden}
+    .hero-grid{display:grid; gap:28px; align-items:center; grid-template-columns:1.2fr .8fr}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+    .title{font-size:clamp(28px, 5vw, 56px); font-weight:800; line-height:1.05; letter-spacing:-.02em}
+    .gradient-text{background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .lead{font-size:clamp(14px, 2.2vw,18px); color:var(--muted)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#061120; border-color:transparent}
+    .avatar{width:160px;height:160px;border-radius:22px; border:1px solid rgba(255,255,255,.15); box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:700px){.stats{grid-template-columns:1fr 1fr}}
+    .stat{padding:16px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.08); text-align:center}
+    .stat b{font-size:22px}
+    .section{margin-top:28px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:900px){.grid-3{grid-template-columns:1fr 1fr}} @media(max-width:620px){.grid-3{grid-template-columns:1fr}}
+    .card{padding:18px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.08)}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04); font-weight:600}
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .footer{color:var(--muted);text-align:center;padding:24px}
+    /* animated blobs */
+    .blob{position:absolute;filter:blur(50px);opacity:.35;mix-blend-mode:screen}
+    .b1{top:-60px;left:-60px;width:300px;height:300px;background:#7c3aed;border-radius:40% 60% 60% 40%;animation:blob 12s ease-in-out infinite}
+    .b2{bottom:-80px;right:-80px;width:320px;height:320px;background:#22d3ee;border-radius:60% 40% 40% 60%;animation:blob 10s ease-in-out -3s infinite}
+    @keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-15px) scale(1.06)}}
+    /* theme toggle */
+    .toggle{position:fixed;right:18px;top:18px;z-index:9}
   </style>
 </head>
 <body>
-  <header class="hero container card">
-    <img class="gif floating" src="https://github.com/nongdancryptos/nongdancryptos/blob/main/images/Developer.gif" width="160" height="160" alt="Developer" />
-    <h1 class="title">
-      <a href="https://prepverse.vercel.app" target="_blank" rel="noopener">
-        <img src="https://readme-typing-svg.herokuapp.com?font=Tourney&weight=900&size=36&pause=1000&color=F74609&center=true&vCenter=true&repeat=false&width=700&lines=Hello+%3C%F0%9D%9A%8C%F0%9D%9A%98%F0%9D%9A%8D%F0%9D%9A%8E%F0%9D%9A%9B%F0%9D%9A%9C%2F%3E!%2C+I'm+TieuPhu" alt="Typing" />
-      </a>
-    </h1>
-    <div class="badges">
-      <a href="https://github.com/nongdancryptos"><img alt="Welcome" src="https://custom-icon-badges.demolab.com/badge/Hello,Programmer!-Welcome-orange.svg?style=flat&logo=github"></a>
-      <a href="https://github.com/nongdancryptos/The-Complete-FAANG-Preparation"><img alt="Open Source" src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a>
-      <a href="https://github.com/nongdancryptos"><img alt="Streak" src="https://custom-icon-badges.demolab.com/badge/dynamic/json?logo=fire&logoColor=fff&color=orange&label=github%20streak&query=%24.currentStreak.length&suffix=%20days&url=https%3A%2F%2Fstreak-stats.demolab.com%2F%3Fuser%3Dnongdancryptos%26type%3Djson"></a>
-      <a href="https://github.com/nongdancryptos/nongdancryptos/commits/master"><img alt="Last Commit" src="https://custom-icon-badges.demolab.com/github/last-commit/nongdancryptos/nongdancryptos?style=plastic&logo=history"></a>
-      <a href="https://github.com/nongdancryptos/nongdancryptos/graphs/contributors"><img alt="Contributors" src="https://custom-icon-badges.demolab.com/github/contributors/nongdancryptos/nongdancryptos?label=Awesome%20Contributors&style=plastic&logo=heart-fill"></a>
-      <a href="https://github.com/nongdancryptos"><img alt="Visitors Today" src="https://hits.sh/github.com/nongdancryptos/nongdancryptos.svg?view=today-total&label=Today%27s%20Profile%20View&extraCount=0&labelColor=fe3757&logo=github"></a>
-      <a href="https://github.com/nongdancryptos"><img alt="Visitors" src="https://hits.sh/github.com/nongdancryptos/nongdancryptos.svg?label=Total%20Profile%20View&extraCount=0&color=fe3757&labelColor=bf11cc&logo=github"></a>
-      <a href="https://leetcode.com/nongdancryptos"><img alt="LeetCode" src="https://img.shields.io/badge/dynamic/json?style=flat&labelColor=orange&logo=leetcode&logoColor=black&label=Solved&query=solvedOverTotal&url=https://leetcode-badge.vercel.app/api/users/nongdancryptos"></a>
-      <a href="https://github.com/nongdancryptos?tab=followers"><img alt="Followers" src="https://custom-icon-badges.demolab.com/github/followers/nongdancryptos?style=social&logo=followers"></a>
-    </div>
-  </header>
-
-  <div class="divider" aria-hidden="true"></div>
+  <button class="toggle btn" aria-label="Đổi theme" onclick="toggleTheme()">🌓 <span id="themeLabel">Dark</span></button>
 
   <main class="container">
+    <!-- HERO -->
+    <section class="hero glass section">
+      <div class="b1 blob"></div><div class="b2 blob"></div>
+      <div class="hero-grid" style="position:relative; z-index:1; padding:28px">
+        <div>
+          <h1 class="title">Xin chào, mình là <span class="gradient-text">TieuPhu</span> 👋</h1>
+          <p class="lead">MMO • Tech • Automation. Mình theo đuổi triết lý <b>Smart Work &gt; Hard Work</b> — xây dựng các workflow số hoá, công cụ tự động hoá và sản phẩm web gọn nhẹ nhưng hiệu quả.</p>
+          <div class="cta" style="margin-top:14px">
+            <a class="btn primary" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">Xem GitHub</a>
+            <a class="btn" href="#contact">Liên hệ</a>
+          </div>
+        </div>
+        <div style="justify-self:center">
+          <img class="avatar" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Avatar" loading="lazy"/>
+        </div>
+      </div>
+      <div class="stats" style="padding:0 28px 28px">
+        <div class="stat"><b>10K+</b><div class="muted">Lines automated</div></div>
+        <div class="stat"><b>20+</b><div class="muted">Projects</div></div>
+        <div class="stat"><b>5yrs</b><div class="muted">Experience</div></div>
+      </div>
+    </section>
 
-    <section class="section card">
-      <div class="img-row" style="justify-content:space-between;align-items:center">
-        <a class="pill" href="https://komarev.com/ghpvc/?username=nongdancryptos&label=Profile%20views&color=00CED1&style=plastic" target="_blank" rel="noopener">
-          <strong>Profile views</strong>
-          <span class="kbd">live</span>
+    <!-- ABOUT + SKILLS -->
+    <section class="section grid-3">
+      <article class="card">
+        <h3>🙋‍♂️ Về mình</h3>
+        <p>Mình thích khám phá công nghệ, MMO và những cách sáng tạo để tối ưu công việc. Mỗi dòng code là một nét cọ trên canvas đổi mới ✨</p>
+        <div class="skills" style="margin-top:8px">
+          <span class="chip">Automation</span>
+          <span class="chip">Web Scraping</span>
+          <span class="chip">Blockchain</span>
+          <span class="chip">Bots</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>🧰 Tech stack chính</h3>
+        <div class="skills">
+          <span class="chip">JavaScript/TypeScript</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">Python</span>
+          <span class="chip">Go</span>
+          <span class="chip">PHP</span>
+          <span class="chip">Rust</span>
+        </div>
+        <h4 style="margin:14px 0 6px">Đang mở rộng</h4>
+        <div class="skills">
+          <span class="chip">C/C++</span>
+          <span class="chip">C#</span>
+          <span class="chip">Solana</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>📈 Live badges</h3>
+        <div style="display:grid;gap:8px">
+          <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=transparent&show_icons=true" alt="stats" loading="lazy"/>
+          <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=true" alt="streak" loading="lazy"/>
+        </div>
+      </article>
+    </section>
+
+    <!-- PROJECTS (sample) -->
+    <section class="section">
+      <h2 style="margin:6px 0 14px">🚀 Dự án nổi bật</h2>
+      <div class="grid-3">
+        <a class="card" href="https://nongdancryptos.github.io" target="_blank" rel="noopener">
+          <h4>Flynn Docs</h4>
+          <p class="muted">Tài liệu & ghi chú kỹ thuật được build tĩnh, tải siêu nhanh.</p>
         </a>
-        <a class="pill" href="https://nongdancryptos.github.io" target="_blank" rel="noopener">Github Page: <strong>Flynn Docs</strong></a>
-      </div>
-      <div class="img-row" style="margin-top:12px">
-        <img class="glow" src="https://github.com/user-attachments/assets/2d1c7b36-d6f8-476f-8003-2dc3e34f78c3" alt="still awake" />
-      </div>
-      <p class="subtle" style="text-align:center;margin-top:12px">[Refresh trang để thấy meme ngẫu nhiên 😄]</p>
-      <div class="links" style="margin-top:10px">
-        <a href="https://t.me/OnTopAirdrop" class="pill" target="_blank" rel="noopener">Telegram Channel</a>
-        <a href="https://t.me/OnTopAirdropGroup" class="pill" target="_blank" rel="noopener">Telegram Group</a>
-      </div>
-    </section>
-
-    <section class="section grid-2">
-      <div class="panel">
-        <h2>👋 About Me</h2>
-        <p>Tôi là <strong>TieuPhu</strong> — người học hỏi không ngừng, yêu thích công nghệ, MMO và những cách sáng tạo để tối ưu công việc. Slogan: “Do your best – Play hard – Keep improving.”<br>✨ Mỗi dòng code là một nét cọ trên bức tranh sáng tạo.</p>
-      </div>
-      <div class="panel">
-        <h2>🛠 Skills & Tech Stack</h2>
-        <p><img alt="Typing" src="https://readme-typing-svg.demolab.com?font=Playfair+Display&size=25&pause=1000&color=00FF00;FFD700;FF4500;1E90FF;FF1493&background=000000&center=true&vCenter=true&width=600&lines=Make+Money+Online+%F0%9F%92%BB%F0%9F%8C%8D;Freedom+Through+Digital+Hustle+%F0%9F%92%B8;Smart+Work+%3E+Hard+Work+%F0%9F%9A%80;Click.+Earn.+Repeat.+%F0%9F%94%81;Work+Anytime,+Earn+Anywhere+%F0%9F%8C%8E;Digital+Hustle,+Global+Reach+%F0%9F%8C%90;Turn+Ideas+Into+Income+%F0%9F%92%A1;Passive+Income,+Active+Life+%E2%8F%B3;Think+Digital,+Earn+Global+%F0%9F%8C%8D;Build+Online,+Earn+Freedom+%F0%9F%95%8A%EF%B8%8F" /></p>
-        <p><span class="subtle">Proficient in:</span></p>
-        <div class="links">
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Shell_script-121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="bash"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/PHP-777BB4.svg?style=for-the-badge&logo=php&logoColor=white" alt="php"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Python-14354C.svg?style=for-the-badge&logo=python&logoColor=white" alt="python"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/JavaScript-323330.svg?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="js"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/TypeScript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="ts"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Node.js-43853D.svg?style=for-the-badge&logo=node.js&logoColor=white" alt="node"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Go-00ADD8.svg?style=for-the-badge&logo=go&logoColor=white" alt="go"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Ruby-CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white" alt="ruby"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Perl-39457E.svg?style=for-the-badge&logo=perl&logoColor=white" alt="perl"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Lua-2C2D72.svg?style=for-the-badge&logo=lua&logoColor=white" alt="lua"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white" alt="java"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/Rust-000000.svg?style=for-the-badge&logo=rust&logoColor=white" alt="rust"></a>
-        </div>
-        <p style="margin-top:8px"><span class="subtle">Expanding to:</span></p>
-        <div class="links">
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/C-00599C.svg?logo=c&style=for-the-badge&logoColor=white" alt="c"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/C%23-239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white" alt="csharp"></a>
-          <a href="https://github.com/nongdancryptos"><img src="https://img.shields.io/badge/C++-00599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="cpp"></a>
-        </div>
-        <p style="margin-top:8px"><span class="subtle">Interests:</span> Web Scraping • Blockchain • Ethical Hacking • Hackintosh • Bot Script</p>
-      </div>
-    </section>
-
-    <section class="section card">
-      <h2>🔥 GitHub Stats</h2>
-      <div class="stats">
-        <a href="https://github.com/nongdancryptos" target="_blank" rel="noopener"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&pause=1000&width=435&lines=%F0%9F%93%9A+%EF%BC%B3%EF%BC%B4%EF%BC%A1%EF%BC%B4%EF%BC%B3" alt="stats-typing"/></a>
-        <a href="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" target="_blank" rel="noopener"><img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" alt="stats" /></a>
-        <a href="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" target="_blank" rel="noopener"><img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" alt="streak" /></a>
-        <a href="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" target="_blank" rel="noopener"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" alt="langs" /></a>
-      </div>
-    </section>
-
-    <section class="section grid-2">
-      <div class="panel">
-        <h2>🌐 Liên hệ & Mạng xã hội</h2>
-        <div class="links">
-          <a class="pill" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://telegram.me/TieuPhuOnTop" target="_blank" rel="noopener">Telegram</a>
-          <a class="pill" href="mailto:nongdancryptos@gmail.com">Gmail</a>
-          <a class="pill" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-          <a class="pill" href="https://threads.net/" target="_blank" rel="noopener">Threads</a>
-          <a class="pill" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
-          <a class="pill" href="https://mastodon.social/" target="_blank" rel="noopener">Mastodon</a>
-          <a class="pill" href="https://discord.com/user/" target="_blank" rel="noopener">Discord</a>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>✍️ Quote & Meme</h2>
-        <p><img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" alt="quote" style="width:100%"/></p>
-        <div class="img-row">
-          <img src="https://komarev.com/ghpvc/?username=nongdancryptos&&style=flat-square" alt="views flat"/>
-        </div>
-        <div class="img-row">
-          <img src="https://github.com/SP-XD/SP-XD/blob/main/images/dino_rounded.gif?raw=true" alt="dino"/>
-          <img src="https://github.com/SP-XD/SP-XD/blob/main/images/this_page_is.gif?raw=true" alt="this page is" style="max-width:380px"/>
+        <a class="card" href="https://prepverse.vercel.app" target="_blank" rel="noopener">
+          <h4>PrepVerse</h4>
+          <p class="muted">Trang luyện tập/phỏng vấn nhanh với trải nghiệm tối giản.</p>
+        </a>
+        <div class="card">
+          <h4>Automation Toolkit</h4>
+          <p class="muted">Bộ script tự động hoá MMO (scraping, bot, notify…).</p>
         </div>
       </div>
     </section>
 
-    <section class="section card">
-      <h2>☕ Support My Work</h2>
-      <div class="support-grid">
-        <div class="tile">
-          <a href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">
-            <img src="https://media3.giphy.com/media/ZEB6yFbLnhyQf7g3hn/giphy.gif" width="120" alt="kofi"/>
-          </a>
-          <p class="subtle">Buy Me Coffee</p>
-        </div>
-        <div class="tile">
-          <a href="https://paypal.me/hungsyn" target="_blank" rel="noopener">
-            <img src="https://img.shields.io/badge/Paypal-00457C.svg?&style=for-the-badge&logo=paypal&logoColor=white" alt="paypal"/>
-          </a>
-          <p class="subtle">PayPal</p>
-        </div>
-        <div class="tile">
-          <img class="qr" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/refs/heads/main/QR-Code/evm_wallet_qr.png" alt="ETH QR"/>
-          <p class="subtle">Ethereum / POL <br><small>0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</small></p>
-        </div>
-        <div class="tile">
-          <img class="qr" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/refs/heads/main/QR-Code/btc_wallet_qr.png" alt="BTC QR"/>
-          <p class="subtle">Bitcoin <br><small>bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</small></p>
-        </div>
-        <div class="tile">
-          <img class="qr" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/refs/heads/main/QR-Code/sol_wallet_qr.png" alt="SOL QR"/>
-          <p class="subtle">Solana <br><small>7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</small></p>
-        </div>
-        <div class="tile">
-          <img class="qr" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/refs/heads/main/QR-Code/sui_wallet_qr.png" alt="SUI QR"/>
-          <p class="subtle">SUI <br><small>0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</small></p>
-        </div>
-        <div class="tile">
-          <img class="qr" src="https://github.com/nongdancryptos/nongdancryptos/blob/main/QR-Code/Binance-Pay-QR.jpg?raw=true" alt="Binance Pay"/>
-          <p class="subtle">BINANCE PAY ID: <strong>518668773</strong></p>
+    <!-- SUPPORT -->
+    <section class="section">
+      <h2>☕ Ủng hộ</h2>
+      <div class="grid-3">
+        <a class="card" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener"><b>Buy me a coffee</b><p class="muted">ko-fi.com/tieuphu</p></a>
+        <a class="card" href="https://paypal.me/hungsyn" target="_blank" rel="noopener"><b>PayPal</b><p class="muted">paypal.me/hungsyn</p></a>
+        <div class="card">
+          <b>Crypto</b>
+          <p class="muted" style="word-break:break-all">ETH/POL: 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</p>
+          <p class="muted" style="word-break:break-all">BTC: bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</p>
         </div>
       </div>
     </section>
 
-    <section class="section card">
-      <div class="img-row">
-        <img src="https://github.com/nongdancryptos/nongdancryptos/blob/main/images/marquee.svg" alt="thanks"/>
-        <img src="https://github.com/nongdancryptos/nongdancryptos/blob/main/images/footer.svg" alt="footer"/>
+    <!-- CONTACT -->
+    <section id="contact" class="section glass" style="padding:18px 24px">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+        <h2 style="margin:0">📬 Liên hệ</h2>
+        <div class="skills">
+          <a class="chip" href="mailto:nongdancryptos@gmail.com">Gmail</a>
+          <a class="chip" href="https://t.me/TieuPhuOnTop" target="_blank">Telegram</a>
+          <a class="chip" href="https://x.com/OnTopAirdrop" target="_blank">X</a>
+          <a class="chip" href="https://github.com/nongdancryptos" target="_blank">GitHub</a>
+        </div>
       </div>
     </section>
 
+    <p class="footer">© <span id="y"></span> TieuPhu • làm nhẹ, chạy nhanh ⚡</p>
   </main>
 
-  <footer class="container">
-    <p class="subtle">© <span id="y"></span> TieuPhu • Built with ❤️ & GitHub Pages</p>
-  </footer>
-
   <script>
-    // Year
+    // theme toggle
+    const root = document.documentElement;
+    const label = document.getElementById('themeLabel');
+    function setTheme(mode){
+      document.documentElement.setAttribute('data-theme', mode);
+      localStorage.setItem('theme', mode);
+      label && (label.textContent = mode === 'dark' ? 'Dark' : 'Light');
+    }
+    function toggleTheme(){ setTheme((document.documentElement.getAttribute('data-theme')==='dark')?'light':'dark'); }
+    (function(){ setTheme(localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')); })();
+    // year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>

@@ -1,190 +1,161 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TieuPhu — Airdrop • MMO • On-chain</title>
-  <meta name="description" content="TieuPhu • Airdrop automation • MMO • On-chain • Tool • Proxy • Crypto Updates" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TieuPhu • Airdrop • MMO • On-chain</title>
+  <meta name="description" content="TieuPhu — Airdrop, MMO, Automation, Proxy và cập nhật crypto." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://api.coingecko.com" crossorigin>
-  <link rel="preconnect" href="https://min-api.cryptocompare.com" crossorigin>
 </head>
 <body>
-  <!-- ===== App Shell ===== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">
-        <span class="badge">TP</span>
-        <span class="brand-text">TieuPhu</span>
-      </a>
+  <!-- Theme toggle -->
+  <button id="themeToggle" class="theme-toggle" title="Đổi giao diện (Light/Dark)" aria-label="Toggle theme">
+    <!-- icon sẽ đổi bằng JS -->
+    <svg id="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 4a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm0-18a1 1 0 0 0 1-1V2a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm10 7h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2ZM3 12a1 1 0 0 0-1-1H1a1 1 0 1 0 0 2h1a1 1 0 0 0 1-1Zm15.657 7.657a1 1 0 0 0 1.414-1.414l-.707-.707a1 1 0 1 0-1.414 1.414l.707.707Zm-12.728 0 .707-.707A1 1 0 1 0 5.222 16.536l-.707.707A1 1 0 1 0 5.93 19.364Zm12.728-12.728.707-.707A1 1 0 0 0 18.364 4.93l-.707.707a1 1 0 0 0 1.414 1.414Zm-12.728 0A1 1 0 1 0 5.93 5.222l-.707-.707A1 1 0 0 0 3.808 5.93l.707.707Z"/></svg>
+    <svg id="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" hidden><path d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
+  </button>
 
-      <nav class="nav">
+  <header class="site-top">
+    <nav class="nav">
+      <a href="#" class="brand">TP</a>
+      <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#skills">Skills</a>
         <a href="#news">News</a>
         <a href="#contact">Liên hệ</a>
-        <a class="btn btn--sm" href="about.html">About page</a>
-      </nav>
-    </div>
+      </div>
+    </nav>
 
-    <!-- ===== Top 20 Price Ticker ===== -->
-    <div class="ticker-wrap">
-      <div id="ticker" class="ticker"></div>
-    </div>
+    <section class="hero container">
+      <div class="hero__copy">
+        <p class="eyebrow">Airdrop • MMO • On-chain</p>
+        <h1 class="h1">Hello Programmer, I'm <span class="grad">TieuPhu</span></h1>
+        <p class="lead">“Do your best – Play hard – Keep improving.” Mình đam mê công nghệ, tối ưu hoá công việc và kiếm tiền online. Ở đây bạn sẽ thấy thông tin airdrop, tool, proxy và cập nhật crypto.</p>
+        <div class="cta">
+          <a class="btn" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
+        </div>
+      </div>
+
+      <div class="hero__art">
+        <img class="hero__img" alt="dev" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif">
+      </div>
+    </section>
   </header>
 
   <main class="container">
-    <!-- ===== Hero ===== -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Hello Programmer, I'm <span class="accent">TieuPhu</span></h1>
-        <p class="lead">
-          “Do your best – Play hard – Keep improving.” Mình đam mê công nghệ,
-          tối ưu hoá công việc và kiếm tiền online. Ở đây bạn sẽ tìm thấy thông tin
-          airdrop, tool, proxy và cập nhật crypto.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn--ghost" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">Telegram</a>
-          <a class="btn btn--ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn btn--ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
-        </div>
-      </div>
-
-      <!-- Simple coder illustration (SVG) -->
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 256 256" role="img">
-          <circle cx="128" cy="128" r="120" class="art-bg"></circle>
-          <rect x="60" y="140" width="136" height="64" rx="12" class="art-body"/>
-          <circle cx="96" cy="108" r="16" class="art-eye"/>
-          <circle cx="160" cy="108" r="16" class="art-eye"/>
-          <rect x="92" y="168" width="72" height="8" rx="4" class="art-line"/>
-        </svg>
-      </div>
-    </section>
-
-    <!-- ===== About ===== -->
-    <section id="about" class="section">
+    <!-- Top coin ticker -->
+    <section class="section" id="top-coins">
       <div class="section-head">
-        <h2>About Me</h2>
-        <p class="muted">Tổng hợp profile, liên hệ và một phần portfolio.</p>
+        <h2 class="section-title">Top 20 Coins (Realtime)</h2>
+      </div>
+      <div class="ticker" aria-live="polite">
+        <div id="ticker-track" class="ticker__track"></div>
+      </div>
+    </section>
+
+    <!-- About quick -->
+    <section id="about" class="section grid-2">
+      <div class="card">
+        <h3>About Me</h3>
+        <ul class="bullets">
+          <li>👋 Mình là <b>TieuPhu</b> — thích khám phá, tối ưu workflow, kiếm tiền online thông minh.</li>
+          <li>🚀 Quan tâm: công nghệ, airdrop, automation, MMO.</li>
+          <li>🧠 Motto: <i>Do your best – Play hard – Keep improving.</i></li>
+        </ul>
       </div>
 
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>Giới thiệu nhanh</h3>
-          <ul class="list">
-            <li>👋 Mình là <b>TieuPhu</b>, thích khám phá cái mới & tối ưu hiệu quả.</li>
-            <li>🔎 Quan tâm: công nghệ, airdrop, bot/script, MMO.</li>
-            <li>🚀 Châm ngôn: “Do your best – Play hard – Keep improving.”</li>
-            <li>🧰 Airdrop Automation • On-chain • Web Scraping • Security</li>
-          </ul>
-        </div>
-
-        <div id="skills" class="card">
-          <h3>Skills & Stack</h3>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">Node.js</span>
-            <span class="chip">JavaScript/TypeScript</span>
-            <span class="chip">Go</span>
-            <span class="chip">PHP</span>
-            <span class="chip">Bash</span>
-            <span class="chip">Rust (learning)</span>
-            <span class="chip">C/C#/C++ (learning)</span>
-          </div>
-          <div class="tags">
-            <span class="tag">Web scraping</span>
-            <span class="tag">Automation</span>
-            <span class="tag">Blockchain</span>
-            <span class="tag">On-chain</span>
-            <span class="tag">Bots</span>
-            <span class="tag">Proxy</span>
-          </div>
+      <div class="card">
+        <h3>Liên kết nhanh</h3>
+        <div class="link-grid">
+          <a class="pill" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
+          <a class="pill" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
+          <a class="pill" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill" href="mailto:nongdancryptos@gmail.com">Email</a>
+          <a class="pill" href="about.html" target="_blank" rel="noopener">Profile đầy đủ</a>
+          <a class="pill" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ủng hộ ☕</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== Crypto News (4 latest & hot) ===== -->
+    <!-- Crypto news -->
     <section id="news" class="section">
       <div class="section-head">
-        <h2>Crypto News</h2>
-        <p class="muted">Tin nhanh về thị trường, dự án & hệ sinh thái.</p>
+        <h2 class="section-title">Crypto News</h2>
+        <p class="muted">4 tin nhanh mới & hot nhất từ nhiều nguồn.</p>
       </div>
-
-      <div id="news-list" class="grid grid-2 grid-responsive">
-        <!-- JS sẽ render 4 card -->
+      <div id="news-list" class="news-grid">
+        <!-- JS render -->
       </div>
-
       <div class="center">
-        <button id="reloadNews" class="btn btn--sm">Tải lại tin</button>
+        <button id="btnReloadNews" class="btn ghost small">Tải lại tin</button>
       </div>
-      <p id="news-empty" class="empty hidden">Không tải được tin tức. Thử lại sau.</p>
     </section>
 
-    <!-- ===== Proxy (gọn, đặt trên liên hệ) ===== -->
+    <!-- Proxy short promo (ngắn gọn, đặt trước liên hệ) -->
     <section class="section">
-      <div class="card card--promo">
-        <div>
-          <h3>Proxy Siêu Rẻ • Ẩn danh • Ổn định</h3>
-          <p class="muted">
-            Cần IP sạch cho airdrop, web scraping hay automation? Thử
-            <b>proxysieure.com</b> — thanh toán nhanh, dùng được ngay.
-          </p>
+      <div class="promo card promo--proxy">
+        <div class="promo__copy">
+          <h3>ProxySieuRe.com</h3>
+          <p class="muted">Proxy tĩnh/rotating chất lượng cao, IP sạch, giá tốt cho airdrop, tool, automation. Thanh toán linh hoạt.</p>
         </div>
-        <a href="https://proxysieure.com" target="_blank" rel="noopener" class="btn">Mua proxy</a>
+        <a class="btn" href="https://proxysieure.com" target="_blank" rel="noopener">Mua Proxy</a>
       </div>
     </section>
 
-    <!-- ===== Contact ===== -->
-    <section id="contact" class="section contact">
+    <!-- Contact -->
+    <section id="contact" class="section">
       <div class="section-head">
-        <h2>Liên hệ & Ủng hộ</h2>
-        <p class="muted">Kết nối nhanh với mình, hoặc mời 1 ly ☕ nếu bạn thấy hữu ích.</p>
+        <h2 class="section-title">Liên hệ & Ủng hộ</h2>
+        <p class="muted">Kết nối nhanh hoặc mời mình 1 ly ☕ nếu bạn thấy hữu ích.</p>
       </div>
 
-      <div class="grid grid-2 grid-responsive">
-        <div class="card">
+      <div class="contact">
+        <div class="social card">
           <h3>Social</h3>
           <div class="social-grid">
-            <!-- Telegram -->
-            <a class="btn-social tg" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.0 14.8l-.3 4.3c.4 0 .6-.2.9-.4l2.1-1.9 4.4 3.2c.8.4 1.4.2 1.6-.7l2.9-13.6c.3-1.2-.4-1.7-1.2-1.4L2.8 10.1c-1.2.5-1.2 1.2-.2 1.5l4.2 1.3 9.8-6.2c.5-.3.9-.1.5.2"/></svg>
-              Telegram
+            <a class="social-btn tg" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">
+              <span>Telegram</span>
             </a>
-            <!-- X/Twitter -->
-            <a class="btn-social x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h3l-7.5 8.6L22 22h-6.4l-5-6.8L4 22H1l8.2-9.5L2 2h6.4l4.6 6.2L18 2z"/></svg>
-              X (Twitter)
+            <a class="social-btn x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
+              <span>X (Twitter)</span>
             </a>
-            <!-- GitHub -->
-            <a class="btn-social gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2c-3.3.7-4-1.5-4-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.7 2 2.9 1.4.1-.8.5-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-6a4.7 4.7 0 0 1 1.2-3.2c-.1-.3-.5-1.6.1-3.4 0 0 1-.3 3.3 1.2a11.1 11.1 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.8.2 3.1.1 3.4.8.9 1.2 2 1.2 3.2 0 4.7-2.8 5.7-5.4 6 .4.3.9 1 .9 2v3c0 .3.2.7.8.6A12.2 12.2 0 0 0 24 12.7 12 12 0 0 0 12 .5z"/></svg>
-              GitHub
+            <a class="social-btn gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
+              <span>GitHub</span>
             </a>
-            <!-- Email -->
-            <a class="btn-social mail" href="mailto:nongdancryptos@gmail.com">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              Email
+            <a class="social-btn mail" href="mailto:nongdancryptos@gmail.com">
+              <span>Email</span>
             </a>
           </div>
         </div>
 
-        <div class="card">
+        <div class="support card">
           <h3>Ủng hộ</h3>
-          <div class="donate">
-            <a class="btn" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
-            <a class="btn btn--ghost" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
+          <div class="chip-row">
+            <a class="chip" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+            <a class="chip" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
           </div>
-          <p class="muted small">Hoặc ủng hộ qua crypto: ETH/POL/SOL/BTC… (DM mình trên Telegram để nhận địa chỉ chuẩn).</p>
+          <ul class="bullets small">
+            <li><b>ETH / POL (EVM):</b> 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
+            <li><b>BTC:</b> bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
+            <li><b>SOL:</b> 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
+            <li><b>SUI:</b> 0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</li>
+            <li><b>Binance Pay ID:</b> 518668773</li>
+          </ul>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> TieuPhu — Airdrop • MMO • On-chain</p>
-      <a class="link" href="https://proxysieure.com" target="_blank" rel="noopener">proxysieure.com</a>
+  <footer class="site-foot">
+    <div class="container foot-inner">
+      <span>© <span id="y"></span> TieuPhu</span>
+      <a class="muted" href="about.html" target="_blank" rel="noopener">About page</a>
     </div>
   </footer>
 

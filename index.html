@@ -5,26 +5,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>TieuPhu • Airdrop • MMO • On-chain</title>
   <meta name="description" content="TieuPhu — Airdrop, MMO, Automation, Proxy và cập nhật crypto." />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <!-- Theme toggle -->
   <button id="themeToggle" class="theme-toggle" title="Đổi giao diện (Light/Dark)" aria-label="Toggle theme">
-    <!-- icon sẽ đổi bằng JS -->
     <svg id="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 4a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm0-18a1 1 0 0 0 1-1V2a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm10 7h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2ZM3 12a1 1 0 0 0-1-1H1a1 1 0 1 0 0 2h1a1 1 0 0 0 1-1Zm15.657 7.657a1 1 0 0 0 1.414-1.414l-.707-.707a1 1 0 1 0-1.414 1.414l.707.707Zm-12.728 0 .707-.707A1 1 0 1 0 5.222 16.536l-.707.707A1 1 0 1 0 5.93 19.364Zm12.728-12.728.707-.707A1 1 0 0 0 18.364 4.93l-.707.707a1 1 0 0 0 1.414 1.414Zm-12.728 0A1 1 0 1 0 5.93 5.222l-.707-.707A1 1 0 0 0 3.808 5.93l.707.707Z"/></svg>
     <svg id="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" hidden><path d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
   </button>
 
+  <!-- TOP -->
   <header class="site-top">
     <nav class="nav">
       <a href="#" class="brand">TP</a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#features">Features</a>
         <a href="#news">News</a>
         <a href="#contact">Liên hệ</a>
       </div>
@@ -33,12 +32,30 @@
     <section class="hero container">
       <div class="hero__copy">
         <p class="eyebrow">Airdrop • MMO • On-chain</p>
-        <h1 class="h1">Hello Programmer, I'm <span class="grad">TieuPhu</span></h1>
-        <p class="lead">“Do your best – Play hard – Keep improving.” Mình đam mê công nghệ, tối ưu hoá công việc và kiếm tiền online. Ở đây bạn sẽ thấy thông tin airdrop, tool, proxy và cập nhật crypto.</p>
+        <h1 class="h1">Xin chào, mình là <span class="grad">TieuPhu</span> 👋</h1>
+        <p class="lead">“Do your best – Play hard – Keep improving.” Mình tập trung chia sẻ airdrop chất lượng, tool tự động hoá, kiến thức on-chain và cách tối ưu workflow kiếm tiền online.</p>
         <div class="cta">
           <a class="btn" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
           <a class="btn ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
           <a class="btn ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
+        </div>
+
+        <!-- quick stats -->
+        <div class="grid-2" style="margin-top:16px;gap:12px">
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <strong style="font-size:1.3rem">100K+</strong>
+              <div class="muted">Nhiệm vụ airdrop đã làm</div>
+            </div>
+            <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 3h18v2H3zm2 4h14v2H5zm-2 4h18v2H3zm2 4h10v2H5zm-2 4h18v2H3z"/></svg>
+          </div>
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <strong style="font-size:1.3rem">50+ tools</strong>
+              <div class="muted">Automation / bot / script</div>
+            </div>
+            <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 14h-2.586l-2-2H9V9l-2-2H4V4h4l2 2h4l2-2h4v3l-2 2zM4 20l4-4h4l4 4z"/></svg>
+          </div>
         </div>
       </div>
 
@@ -49,17 +66,56 @@
   </header>
 
   <main class="container">
-    <!-- Top coin ticker -->
+    <!-- REALTIME COIN TICKER -->
     <section class="section" id="top-coins">
       <div class="section-head">
         <h2 class="section-title">Top 20 Coins (Realtime)</h2>
+        <p class="muted">Giá & % thay đổi 24h — nguồn Binance WS (fallback CoinGecko).</p>
       </div>
       <div class="ticker" aria-live="polite">
         <div id="ticker-track" class="ticker__track"></div>
       </div>
     </section>
 
-    <!-- About quick -->
+    <!-- FEATURE STRIP -->
+    <section id="features" class="section">
+      <div class="section-head">
+        <h2 class="section-title">Tại sao theo dõi mình?</h2>
+        <p class="muted">Nội dung chọn lọc, thực chiến và cập nhật nhanh.</p>
+      </div>
+      <div class="news-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1640622653658-1b1a5f3386f6?q=80&w=1200&auto=format&fit=crop" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+          <div style="padding-top:10px">
+            <h3 style="margin:0 0 6px">Airdrop Radar</h3>
+            <p class="muted">Các chiến dịch tiềm năng, cơ hội sớm, checklist từng bước để tối ưu chi phí & thời gian.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+          <div style="padding-top:10px">
+            <h3 style="margin:0 0 6px">Automation Tooling</h3>
+            <p class="muted">Script/bot tự động hoá nhiệm vụ, chống trùng lặp, tối ưu tỉ lệ đậu & giảm công sức.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1200&auto=format&fit=crop" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+          <div style="padding-top:10px">
+            <h3 style="margin:0 0 6px">On-chain Insights</h3>
+            <p class="muted">Theo dõi dòng tiền, phân tích chi phí gas, chọn mạng/phương án tối ưu để farm.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+          <div style="padding-top:10px">
+            <h3 style="margin:0 0 6px">MMO Mindset</h3>
+            <p class="muted">Tư duy kiếm tiền bền vững: theo quy trình, ghi log, đo đạc hiệu quả.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT QUICK -->
     <section id="about" class="section grid-2">
       <div class="card">
         <h3>About Me</h3>
@@ -68,36 +124,108 @@
           <li>🚀 Quan tâm: công nghệ, airdrop, automation, MMO.</li>
           <li>🧠 Motto: <i>Do your best – Play hard – Keep improving.</i></li>
         </ul>
+
+        <div class="grid-2" style="gap:12px;margin-top:10px">
+          <div class="card" style="padding:12px">
+            <strong>Stack</strong>
+            <p class="muted" style="margin:.4rem 0 0">Shell, PHP, Python, JS/TS, Node, Go, Ruby, Perl, Lua, Java, Rust…</p>
+          </div>
+          <div class="card" style="padding:12px">
+            <strong>Sở thích</strong>
+            <p class="muted" style="margin:.4rem 0 0">Web Scraping, Blockchain, Ethical Hacking, Hackintosh, Bot.</p>
+          </div>
+        </div>
       </div>
 
+      <!-- Roadmap -->
       <div class="card">
-        <h3>Liên kết nhanh</h3>
-        <div class="link-grid">
+        <h3>Lộ trình nội dung</h3>
+        <ol class="bullets">
+          <li><b>Tuần 1–2:</b> Danh sách airdrop hot + checklist tối ưu phí.</li>
+          <li><b>Tuần 3–4:</b> Ra mắt tool tự động hoá (free & premium).</li>
+          <li><b>Tháng tới:</b> Series on-chain analytics + case study thực tế.</li>
+        </ol>
+
+        <!-- CTA pills -->
+        <div class="link-grid" style="margin-top:6px">
           <a class="pill" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
-          <a class="pill" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
-          <a class="pill" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="mailto:nongdancryptos@gmail.com">Email</a>
           <a class="pill" href="about.html" target="_blank" rel="noopener">Profile đầy đủ</a>
           <a class="pill" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ủng hộ ☕</a>
         </div>
       </div>
     </section>
 
-    <!-- Crypto news -->
+    <!-- FEATURED AIRDROPS (static showcase) -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">Featured Airdrops</h2>
+        <p class="muted">Một vài chiến dịch đang theo dõi (chỉ minh hoạ — cập nhật chi tiết trong Telegram).</p>
+      </div>
+      <div class="news-grid">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=400&auto=format&fit=crop" alt="" style="width:64px;height:64px;border-radius:12px;border:1px solid var(--line);object-fit:cover">
+            <div>
+              <h4 style="margin:.1rem 0">LayerX Quest</h4>
+              <p class="muted" style="margin:0">Nhiệm vụ on-chain đa chain, trọng số tương tác.</p>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:10px">
+            <span class="chip">DeFi</span><span class="chip">Zealy</span><span class="chip">Galxe</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="https://images.unsplash.com/photo-1621768216002-5ac171876625?q=80&w=400&auto=format&fit=crop" alt="" style="width:64px;height:64px;border-radius:12px;border:1px solid var(--line);object-fit:cover">
+            <div>
+              <h4 style="margin:.1rem 0">ZK Builder</h4>
+              <p class="muted" style="margin:0">Interaction testnet/mainnet, snapshot hoạt động.</p>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:10px">
+            <span class="chip">ZK</span><span class="chip">Bridge</span><span class="chip">NFT</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="https://images.unsplash.com/photo-1645797328308-386d05f4b0c0?q=80&w=400&auto=format&fit=crop" alt="" style="width:64px;height:64px;border-radius:12px;border:1px solid var(--line);object-fit:cover">
+            <div>
+              <h4 style="margin:.1rem 0">GameFi Sprint</h4>
+              <p class="muted" style="margin:0">Thử game, on-chain asset, nhiệm vụ tuần.</p>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:10px">
+            <span class="chip">GameFi</span><span class="chip">Tasks</span><span class="chip">Points</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="https://images.unsplash.com/photo-1603575449154-17e35a58c9a1?q=80&w=400&auto=format&fit=crop" alt="" style="width:64px;height:64px;border-radius:12px;border:1px solid var(--line);object-fit:cover">
+            <div>
+              <h4 style="margin:.1rem 0">Infra Quest</h4>
+              <p class="muted" style="margin:0">Node, RPC, vote governance, retroactive.</p>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:10px">
+            <span class="chip">Infra</span><span class="chip">Validator</span><span class="chip">Gov</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRYPTO NEWS (JS render 4 tin) -->
     <section id="news" class="section">
       <div class="section-head">
         <h2 class="section-title">Crypto News</h2>
         <p class="muted">4 tin nhanh mới & hot nhất từ nhiều nguồn.</p>
       </div>
-      <div id="news-list" class="news-grid">
-        <!-- JS render -->
-      </div>
+      <div id="news-list" class="news-grid"></div>
       <div class="center">
         <button id="btnReloadNews" class="btn ghost small">Tải lại tin</button>
       </div>
     </section>
 
-    <!-- Proxy short promo (ngắn gọn, đặt trước liên hệ) -->
+    <!-- SHORT PROXY PROMO -->
     <section class="section">
       <div class="promo card promo--proxy">
         <div class="promo__copy">
@@ -108,29 +236,52 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- TESTIMONIALS + FAQ + CONTACT -->
     <section id="contact" class="section">
       <div class="section-head">
-        <h2 class="section-title">Liên hệ & Ủng hộ</h2>
-        <p class="muted">Kết nối nhanh hoặc mời mình 1 ly ☕ nếu bạn thấy hữu ích.</p>
+        <h2 class="section-title">Cộng đồng nói gì & Liên hệ</h2>
+        <p class="muted">Một vài phản hồi và câu hỏi thường gặp.</p>
       </div>
 
-      <div class="contact">
+      <div class="grid-2" style="gap:20px">
+        <!-- Testimonials -->
+        <div class="card">
+          <h3>Testimonials</h3>
+          <blockquote class="muted" style="margin:0 0 10px;border-left:3px solid var(--line);padding-left:10px">
+            “Checklist rõ ràng, tối ưu phí cực tốt — farm nhàn mà hiệu quả.” — <b>Minh N.</b>
+          </blockquote>
+          <blockquote class="muted" style="margin:0;border-left:3px solid var(--line);padding-left:10px">
+            “Tool auto bền, log đầy đủ, ít lỗi vặt — xứng đáng follow.” — <b>Hải P.</b>
+          </blockquote>
+        </div>
+
+        <!-- FAQ (details/summary, không cần JS) -->
+        <div class="card">
+          <h3>FAQ</h3>
+          <details style="margin-bottom:8px">
+            <summary><b>Airdrop list cập nhật ở đâu?</b></summary>
+            <p class="muted" style="margin:.5rem 0 0">Mình cập nhật sớm nhất trên Telegram. Nhớ bật thông báo kênh <a class="pill" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">OnTopAirdrop</a>.</p>
+          </details>
+          <details style="margin-bottom:8px">
+            <summary><b>Có tool auto không?</b></summary>
+            <p class="muted" style="margin:.5rem 0 0">Có — mình có tool free và bản premium cho chiến dịch lớn. Liên hệ qua email/Telegram để nhận.</p>
+          </details>
+          <details>
+            <summary><b>Mua proxy ở đâu?</b></summary>
+            <p class="muted" style="margin:.5rem 0 0">Bạn có thể mua tại <a class="pill" href="https://proxysieure.com" target="_blank" rel="noopener">proxysieure.com</a> — IP sạch, giá tốt.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Social + Support (giữ layout đẹp) -->
+      <div class="contact" style="margin-top:20px">
         <div class="social card">
           <h3>Social</h3>
           <div class="social-grid">
-            <a class="social-btn tg" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">
-              <span>Telegram</span>
-            </a>
-            <a class="social-btn x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
-              <span>X (Twitter)</span>
-            </a>
-            <a class="social-btn gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
-              <span>GitHub</span>
-            </a>
-            <a class="social-btn mail" href="mailto:nongdancryptos@gmail.com">
-              <span>Email</span>
-            </a>
+            <a class="social-btn tg" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener"><span>Telegram</span></a>
+            <a class="social-btn x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener"><span>X (Twitter)</span></a>
+            <a class="social-btn gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener"><span>GitHub</span></a>
+            <a class="social-btn mail" href="mailto:nongdancryptos@gmail.com"><span>Email</span></a>
           </div>
         </div>
 

@@ -1,9 +1,8 @@
-// Helper
+// ===== Helpers =====
 const $ = (q) => document.querySelector(q);
-const $$ = (q) => document.querySelectorAll(q);
 
 // Year in footer
-$("#y").textContent = new Date().getFullYear();
+$("#y") && ($("#y").textContent = new Date().getFullYear());
 
 /* =========================================================
    REAL-TIME TICKER (Top 20) – CoinGecko, refresh mỗi 60s
@@ -11,7 +10,7 @@ $("#y").textContent = new Date().getFullYear();
 const TICKER_URL =
   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&price_change_percentage=1h,24h";
 
-const tickerTrack = $("#ticker-track");
+const tickerTrack = document.getElementById("ticker-track");
 
 function renderTicker(coins) {
   const items = coins
@@ -27,8 +26,7 @@ function renderTicker(coins) {
     })
     .join("");
 
-  // để chạy mượt, nhân đôi dải để marquee không bị hụt
-  tickerTrack.innerHTML = items + items;
+  tickerTrack.innerHTML = items + items; // nhân đôi cho hiệu ứng marquee mượt
 }
 
 async function loadTicker() {
@@ -47,9 +45,12 @@ loadTicker();
 setInterval(loadTicker, 60_000);
 
 /* =========================================================
-   CRYPTO NEWS – nguồn CryptoCompare (CORS OK)
+   CRYPTO NEWS – chỉ hiện 4 tin hot & mới nhất
+   Nguồn chính: CryptoCompare (CORS OK)
    Fallback: CoinDesk RSS qua allorigins
    ========================================================= */
+const NEWS_LIMIT = 4;
+
 const newsList = document.getElementById("news-list");
 const reloadNewsBtn = document.getElementById("reload-news");
 
@@ -95,7 +96,7 @@ async function fetchCoinDesk() {
   const res = await fetch(COINDESK_RSS, { cache: "no-store" });
   const xml = await res.text();
   const doc = new DOMParser().parseFromString(xml, "text/xml");
-  const items = [...doc.querySelectorAll("item")].slice(0, 18);
+  const items = [...doc.querySelectorAll("item")];
   return items.map((it) => ({
     title: it.querySelector("title")?.textContent ?? "Untitled",
     url: it.querySelector("link")?.textContent ?? "#",
@@ -112,14 +113,24 @@ async function loadNews() {
   try {
     newsList.innerHTML =
       '<div class="card glass"><p class="muted">Đang tải tin tức…</p></div>';
+
+    // Lấy news (CC -> fallback CoinDesk)
     let data = [];
     try {
       data = await fetchCryptoCompare();
     } catch {
-      data = await fetchCoinDesk(); // fallback
+      data = await fetchCoinDesk();
     }
+
     if (!data.length) throw new Error("no news");
-    newsList.innerHTML = data.map(newsCard).join("");
+
+    // Sắp xếp theo thời gian mới nhất, lấy đúng 4 tin
+    const top4 = data
+      .filter((n) => n.date) // có thời gian
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, NEWS_LIMIT);
+
+    newsList.innerHTML = top4.map(newsCard).join("");
   } catch (e) {
     console.error(e);
     newsList.innerHTML =

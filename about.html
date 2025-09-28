@@ -6,73 +6,69 @@
   <title>About • TieuPhu</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="container" style="padding-top:28px">
-  <a class="btn small ghost" href="index.html">← Quay lại</a>
-  <section class="section">
-    <div class="card" style="display:flex;gap:12px;align-items:center">
-      <img src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif" alt="avatar" width="72" height="72" style="border-radius:14px;border:1px solid var(--line)">
-      <div>
-        <h1 class="h1" style="margin:.2rem 0">TieuPhu</h1>
-        <p class="muted">Airdrop • Crypto • MMO • Automation</p>
-      </div>
-    </div>
+<body>
+  <button id="themeToggle" class="theme-toggle" title="Đổi giao diện (Light/Dark)" aria-label="Toggle theme">
+    <svg id="icon-sun" viewBox="0 0 24 24" width="18" height="18"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z M12 22a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Z M12 2a1 1 0 0 0 1-1V0a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Z"/></svg>
+    <svg id="icon-moon" viewBox="0 0 24 24" width="18" height="18" hidden><path d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
+  </button>
 
-    <div class="grid-2" style="margin-top:16px">
-      <div class="card">
-        <h3>👋 About Me</h3>
-        <ul class="bullets">
-          <li>Mình là <b>TieuPhu</b> — thích khám phá, tối ưu workflow, kiếm tiền online thông minh.</li>
-          <li>Motto: <i>Do your best – Play hard – Keep improving.</i></li>
-          <li>Quan tâm: công nghệ, airdrop, automation, MMO.</li>
-        </ul>
-        <h3 style="margin-top:12px">🛠 Kỹ năng</h3>
-        <p>Shell, PHP, Python, JavaScript/TypeScript, Node.js, Go, Ruby, Perl, Lua, Java, Rust. Đang mở rộng: C, C#, C++.</p>
-        <p>Sở thích: Web Scraping, Blockchain, Ethical Hacking, Hackintosh, Bot Script.</p>
-      </div>
-
-      <div class="card">
-        <h3>🔗 Liên hệ nhanh</h3>
-        <div class="link-grid">
-          <a class="pill" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
-          <a class="pill" href="mailto:nongdancryptos@gmail.com">Email</a>
-          <a class="pill" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
-          <a class="pill" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
-          <a class="pill" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
+  <main class="container" style="padding:24px 0">
+    <section class="card">
+      <div style="display:flex;gap:14px;align-items:center">
+        <img src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif" alt="avatar" width="72" height="72" style="border-radius:12px;border:1px solid var(--line)">
+        <div>
+          <h1 class="h1" style="margin:0;font-size:28px">TieuPhu</h1>
+          <div class="muted">Airdrop • Crypto • MMO • Automation</div>
         </div>
-
-        <h3 style="margin-top:12px">☕ Ủng hộ</h3>
-        <ul class="bullets small">
-          <li><b>ETH / POL (EVM):</b> 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
-          <li><b>BTC:</b> bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
-          <li><b>SOL:</b> 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
-          <li><b>SUI:</b> 0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</li>
-          <li><b>Binance Pay ID:</b> 518668773</li>
-        </ul>
       </div>
-    </div>
 
-    <div class="card" style="margin-top:16px">
-      <h3>📊 Thống kê GitHub</h3>
-      <div class="news-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-        <a href="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" target="_blank" rel="noopener">
-          <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" alt="stats" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line)">
-        </a>
-        <a href="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" target="_blank" rel="noopener">
-          <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" alt="streak" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line)">
-        </a>
-        <a href="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" target="_blank" rel="noopener">
-          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" alt="top-langs" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line)">
-        </a>
+      <p style="margin:14px 0 0">Mình thích các giải pháp đơn giản, chạy ổn định và có log rõ ràng. Nội dung tập trung vào airdrop thực chiến, công cụ tự động hoá và tư duy tối ưu chi phí.</p>
+
+      <div class="grid-2" style="gap:12px;margin-top:10px">
+        <div class="card" style="padding:12px">
+          <strong>Ngôn ngữ & Tools</strong>
+          <p class="muted" style="margin:.4rem 0 0">Shell, PHP, Python, JavaScript/TypeScript, Node.js, Go, Ruby, Perl, Lua, Java, Rust.</p>
+        </div>
+        <div class="card" style="padding:12px">
+          <strong>Sở thích</strong>
+          <p class="muted" style="margin:.4rem 0 0">Web Scraping, Blockchain, Ethical Hacking, Hackintosh, Bot Script.</p>
+        </div>
       </div>
-    </div>
-  </section>
+
+      <h3>Ủng hộ</h3>
+      <div class="chip-row" style="margin-bottom:6px">
+        <a class="chip" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+        <a class="chip" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
+      </div>
+      <ul class="bullets small">
+        <li><b>ETH / POL (EVM):</b> 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
+        <li><b>BTC:</b> bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
+        <li><b>SOL:</b> 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
+        <li><b>SUI:</b> 0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</li>
+        <li><b>Binance Pay ID:</b> 518668773</li>
+      </ul>
+
+      <div class="social-grid" style="margin-top:10px">
+        <a class="social-btn tg" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener"><span>Telegram</span></a>
+        <a class="social-btn x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener"><span>X (Twitter)</span></a>
+        <a class="social-btn gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener"><span>GitHub</span></a>
+        <a class="social-btn mail" href="mailto:nongdancryptos@gmail.com"><span>Email</span></a>
+      </div>
+    </section>
+  </main>
+
   <script>
-    // đồng bộ theme với index
-    (function(){
-      const saved = localStorage.getItem("tp-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", saved);
-    })();
+    // simple theme sync with index.js approach
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+    const saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    const isLight = () => root.getAttribute('data-theme') === 'light';
+    const syncIcon = () => { if (isLight()){iconSun.hidden=true;iconMoon.hidden=false;}else{iconSun.hidden=false;iconMoon.hidden=true;} };
+    syncIcon();
+    btn.addEventListener('click', ()=>{ root.setAttribute('data-theme', isLight()?'dark':'light'); localStorage.setItem('theme', root.getAttribute('data-theme')); syncIcon(); });
   </script>
 </body>
 </html>

@@ -100,13 +100,112 @@
     </div>
     <div class="resource">
       <div>
-        <h3>Checklist an toàn</h3>
-        <ul class="bullets">
-          <li>Ví riêng từng hệ (EVM, Sol, Sui…), seed phrase ngoại tuyến.</li>
-          <li>Proxy/Residential tốt, giới hạn 1 IP / 1-2 tài khoản.</li>
-          <li>Nhật ký claim/tx và chi phí gas để tối ưu vốn.</li>
-          <li>Bot: random delay + backoff + xử lý captcha khi cần.</li>
-        </ul>
+     <!-- PROXYSIEURE: Giới thiệu dịch vụ proxy -->
+<section id="proxy" class="section">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="title">proxysieure.com — Proxy ổn định cho airdrop & automation</h2>
+      <p class="muted">
+        IP sạch, uptime cao, xoay IP mượt — hỗ trợ cả <b>Residential / Datacenter / ISP</b>, phù hợp cày airdrop, MMO, tool, và bảo mật tài khoản.
+      </p>
+    </header>
+
+    <!-- USP Cards -->
+    <div class="grid grid-4">
+      <div class="card">
+        <h3>IP sạch & đa dạng</h3>
+        <p>Hỗ trợ nhiều quốc gia/khu vực, chọn IP theo nhu cầu, whitelist IP hoặc user/pass auth.</p>
+      </div>
+      <div class="card">
+        <h3>Rotating / Static</h3>
+        <p>Rotating theo thời gian/requests, static ổn định cho KYC/đăng nhập quan trọng.</p>
+      </div>
+      <div class="card">
+        <h3>API & Dashboard</h3>
+        <p>Quản lý cổng, reset, lưu logs; API giúp tích hợp nhanh với bot/script.</p>
+      </div>
+      <div class="card">
+        <h3>Uptime 99.9%</h3>
+        <p>Hạ tầng ổn định, băng thông cao, tốc độ tốt cho automation & multi-account.</p>
+      </div>
+    </div>
+
+    <!-- Pricing (tóm tắt) -->
+    <div class="card mt-16">
+      <div class="flex-between flex-wrap">
+        <h3 class="mb-8">Gói dịch vụ</h3>
+        <a class="btn" href="https://proxysieure.com" target="_blank" rel="noopener">Mua ngay tại proxysieure.com</a>
+      </div>
+      <div class="grid grid-3 mt-8">
+        <div class="price">
+          <h4>Residential</h4>
+          <p class="muted">IP xoay toàn cầu, phù hợp cày airdrop & crawling.</p>
+          <div class="tag">Từ —/GB</div>
+        </div>
+        <div class="price">
+          <h4>Datacenter</h4>
+          <p class="muted">Tối ưu chi phí, tốc độ cao, ổn định cho tool.</p>
+          <div class="tag">Từ —/tháng</div>
+        </div>
+        <div class="price">
+          <h4>ISP / Static</h4>
+          <p class="muted">IP bền, trust cao cho đăng nhập & KYC.</p>
+          <div class="tag">Từ —/port</div>
+        </div>
+      </div>
+      <small class="muted">*Giá có thể thay đổi theo khu vực & dung lượng. Xem chi tiết trên website.</small>
+    </div>
+
+    <!-- How to Use -->
+    <div class="grid grid-2 mt-16">
+      <div class="card">
+        <h3>Cách tích hợp nhanh</h3>
+        <ol class="steps">
+          <li>Đăng ký & tạo cổng tại <a href="https://proxysieure.com" target="_blank" rel="noopener">proxysieure.com</a>.</li>
+          <li>Chọn quốc gia, chế độ Rotating/Static, whitelist IP hoặc user/pass.</li>
+          <li>Dán endpoint vào tool (HTTP/SOCKS5), test kết nối, triển khai.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Ví dụ cấu hình</h3>
+        <pre class="code small"><code># HTTP proxy (user:pass)
+http://username:password@gateway.proxysieure.com:PORT
+
+# SOCKS5 proxy (whitelist IP)
+socks5://gateway.proxysieure.com:PORT</code></pre>
+        <button class="btn ghost" data-copy="#copy-proxy">Copy mẫu endpoint</button>
+        <textarea id="copy-proxy" class="sr-only">http://username:password@gateway.proxysieure.com:PORT</textarea>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card mt-16">
+      <h3>FAQ nhanh</h3>
+      <details>
+        <summary>Proxy có dùng được cho airdrop không?</summary>
+        <p>Có. Nhiều người dùng cho việc claim, nhiệm vụ on-chain, cũng như bảo vệ tài khoản khi làm MMO.</p>
+      </details>
+      <details>
+        <summary>Hỗ trợ quốc gia nào?</summary>
+        <p>Nhiều tuỳ chọn GEO. Xem danh sách cập nhật trực tiếp trên website.</p>
+      </details>
+      <details>
+        <summary>Rotating bao lâu?</summary>
+        <p>Tuỳ gói (theo thời gian/requests). Bạn có thể đổi IP chủ động qua dashboard/API.</p>
+      </details>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta mt-16">
+      <div>
+        <h3>Bắt đầu với proxysieure.com</h3>
+        <p class="muted">Đăng ký nhanh — nhận IP sạch ngay để tối ưu tỉ lệ & tốc độ làm việc.</p>
+      </div>
+      <a class="btn large" href="https://proxysieure.com" target="_blank" rel="noopener">Truy cập website</a>
+    </div>
+  </div>
+</section>
+
       </div>
       <div>
         <h3>Liên hệ</h3>

@@ -1,100 +1,130 @@
-// ===== Mobile menu =====
-const hamburger = document.querySelector('.hamburger');
-const menu = document.querySelector('.menu');
-if (hamburger && menu){
-  hamburger.addEventListener('click', () => {
-    menu.style.display = (menu.style.display === 'flex' ? 'none' : 'flex');
-  });
+// Helper
+const $ = (q) => document.querySelector(q);
+const $$ = (q) => document.querySelectorAll(q);
+
+// Year in footer
+$("#y").textContent = new Date().getFullYear();
+
+/* =========================================================
+   REAL-TIME TICKER (Top 20) – CoinGecko, refresh mỗi 60s
+   ========================================================= */
+const TICKER_URL =
+  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&price_change_percentage=1h,24h";
+
+const tickerTrack = $("#ticker-track");
+
+function renderTicker(coins) {
+  const items = coins
+    .map((c) => {
+      const chg = Number(c.price_change_percentage_24h || 0).toFixed(2);
+      const cls = chg >= 0 ? "up" : "down";
+      const price = "$" + Number(c.current_price).toLocaleString();
+      return `<span class="badge">
+          <img src="${c.image}" alt="${c.symbol}" width="18" height="18" loading="lazy"/>
+          <b>${c.symbol.toUpperCase()}</b> <span>${price}</span>
+          <span class="chg ${cls}">${chg}%</span>
+        </span>`;
+    })
+    .join("");
+
+  // để chạy mượt, nhân đôi dải để marquee không bị hụt
+  tickerTrack.innerHTML = items + items;
 }
 
-// ===== Footer year =====
-document.getElementById('y').textContent = new Date().getFullYear();
-
-// ===== LIVE TICKER: Top 20 (CoinGecko) =====
-const geckoURL =
-  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=1h,24h,7d';
-
-const tickerEl = document.getElementById('ticker');
-
-function fmt(n, d=2){
-  if (n === null || n === undefined || isNaN(n)) return '-';
-  return Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
-}
-function upDownClass(v){
-  if (v > 0) return 'up';
-  if (v < 0) return 'down';
-  return '';
-}
-async function loadTicker(){
-  try{
-    const res = await fetch(geckoURL, { cache: 'no-store' });
+async function loadTicker() {
+  try {
+    const res = await fetch(TICKER_URL, { cache: "no-store" });
     const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Invalid price data');
-
-    const items = data.map(c => {
-      const chg = c.price_change_percentage_24h;
-      return `
-        <span class="ti">
-          <img src="${c.image}" alt="${c.symbol}" width="18" height="18" loading="lazy" />
-          <b>${c.symbol.toUpperCase()}</b>
-          <span>$${fmt(c.current_price, c.current_price > 1 ? 2 : 4)}</span>
-          <span class="chg ${upDownClass(chg)}">${chg ? chg.toFixed(2) : '0.00'}%</span>
-        </span>
-      `;
-    }).join('');
-
-    tickerEl.innerHTML = items + items; // duplicate to loop mượt
-  }catch(err){
-    console.error(err);
-    tickerEl.innerHTML = `<span class="ti"><b>Prices</b> đang tạm gián đoạn…</span>`;
+    if (!Array.isArray(data)) throw new Error("invalid");
+    renderTicker(data);
+  } catch (e) {
+    console.error("Ticker error:", e);
+    tickerTrack.innerHTML =
+      '<span class="badge">Không tải được giá. Thử lại sau.</span>';
   }
 }
 loadTicker();
 setInterval(loadTicker, 60_000);
 
-// ===== CRYPTO NEWS (CoinStats) =====
-const newsURL = 'https://api.coinstats.app/public/v1/news?skip=0&limit=18';
-const newsList = document.getElementById('news-list');
-const reloadNewsBtn = document.getElementById('reload-news');
+/* =========================================================
+   CRYPTO NEWS – nguồn CryptoCompare (CORS OK)
+   Fallback: CoinDesk RSS qua allorigins
+   ========================================================= */
+const newsList = document.getElementById("news-list");
+const reloadNewsBtn = document.getElementById("reload-news");
 
-async function loadNews(){
-  try{
-    newsList.innerHTML = '';
-    const res = await fetch(newsURL, { cache: 'no-store' });
-    const json = await res.json();
-    const news = json?.news || [];
+const CC_URL = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
+const COINDESK_RSS =
+  "https://api.allorigins.win/raw?url=" +
+  encodeURIComponent("https://www.coindesk.com/arc/outboundfeeds/rss/");
 
-    if (news.length === 0){
-      newsList.innerHTML = `<div class="card glass"><p class="muted">Chưa có tin nào.</p></div>`;
-      return;
+function newsCard({ title, url, image, source, date, description }) {
+  const img =
+    image ||
+    "https://dummyimage.com/800x450/0b1220/ffffff&text=Crypto+News";
+  const dt = date ? new Date(date).toLocaleString() : "";
+  const desc = description ? description.slice(0, 180) + "…" : "";
+  return `
+    <article class="news">
+      <img class="thumb" src="${img}" alt="${source}" loading="lazy" />
+      <div class="inner">
+        <h3>${title}</h3>
+        <p>${desc}</p>
+        <div class="meta"><span>${source}</span><span>${dt}</span></div>
+        <a class="read" href="${url}" target="_blank" rel="noopener">Đọc bài →</a>
+      </div>
+    </article>
+  `;
+}
+
+async function fetchCryptoCompare() {
+  const res = await fetch(CC_URL, { cache: "no-store" });
+  const json = await res.json();
+  if (!json?.Data) throw new Error("CC empty");
+  return json.Data.map((n) => ({
+    title: n.title,
+    url: n.url,
+    image: n.imageurl,
+    source: n.source_info?.name || "CryptoCompare",
+    date: n.published_on * 1000,
+    description: n.body,
+  }));
+}
+
+async function fetchCoinDesk() {
+  const res = await fetch(COINDESK_RSS, { cache: "no-store" });
+  const xml = await res.text();
+  const doc = new DOMParser().parseFromString(xml, "text/xml");
+  const items = [...doc.querySelectorAll("item")].slice(0, 18);
+  return items.map((it) => ({
+    title: it.querySelector("title")?.textContent ?? "Untitled",
+    url: it.querySelector("link")?.textContent ?? "#",
+    image: null,
+    source: "CoinDesk",
+    date: it.querySelector("pubDate")
+      ? new Date(it.querySelector("pubDate").textContent)
+      : null,
+    description: it.querySelector("description")?.textContent ?? "",
+  }));
+}
+
+async function loadNews() {
+  try {
+    newsList.innerHTML =
+      '<div class="card glass"><p class="muted">Đang tải tin tức…</p></div>';
+    let data = [];
+    try {
+      data = await fetchCryptoCompare();
+    } catch {
+      data = await fetchCoinDesk(); // fallback
     }
-
-    const cards = news.map(n => {
-      const img = n.imgURL || n.sourceImg || 'https://dummyimage.com/800x450/0b1220/ffffff&text=Crypto+News';
-      const date = n.feedDate ? new Date(n.feedDate).toLocaleString() : '';
-      const site = n.source || 'Source';
-      const title = n.title || 'Untitled';
-      const desc = n.description || '';
-      const link = n.link || '#';
-
-      return `
-        <article class="news">
-          <img class="thumb" src="${img}" alt="${site}" loading="lazy" />
-          <div class="inner">
-            <h3>${title}</h3>
-            <p>${desc}</p>
-            <div class="meta"><span>${site}</span><span>${date}</span></div>
-            <a class="read" href="${link}" target="_blank" rel="noopener">Đọc bài →</a>
-          </div>
-        </article>
-      `;
-    }).join('');
-
-    newsList.innerHTML = cards;
-  }catch(err){
-    console.error(err);
-    newsList.innerHTML = `<div class="card glass"><p class="muted">Không tải được tin tức. Thử lại sau.</p></div>`;
+    if (!data.length) throw new Error("no news");
+    newsList.innerHTML = data.map(newsCard).join("");
+  } catch (e) {
+    console.error(e);
+    newsList.innerHTML =
+      '<div class="card glass"><p class="muted">Không tải được tin tức. Thử lại sau.</p></div>';
   }
 }
 loadNews();
-reloadNewsBtn.addEventListener('click', loadNews);
+reloadNewsBtn?.addEventListener("click", loadNews);

@@ -1,94 +1,191 @@
-/* ===== Utils ===== */
-const $ = (s, p = document) => p.querySelector(s);
-const $$ = (s, p = document) => [...p.querySelectorAll(s)];
-const fmt = (n, d = 2) => {
-  if (n === null || n === undefined || isNaN(n)) return '-';
-  return Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
-};
-const clip = (str, n = 110) => (str?.length > n ? str.slice(0, n) + '…' : str || '');
-
 /* ===== Year in footer ===== */
-$('#year').textContent = new Date().getFullYear();
+document.getElementById("y").textContent = new Date().getFullYear();
 
-/* ===== Price Ticker (Top 20) =====
-   Source: CoinGecko (public, no API key)
-*/
-async function loadTicker() {
-  try {
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=1h,24h';
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('Ticker fetch failed');
-    const data = await res.json();
+/* ===== Theme toggle (Light/Dark) ===== */
+(function initThemeToggle(){
+  const root = document.documentElement;
+  const btn  = document.getElementById("themeToggle");
+  const sun  = document.getElementById("icon-sun");
+  const moon = document.getElementById("icon-moon");
 
-    const items = data.map(c => {
-      const delta = c.price_change_percentage_24h;
-      const cls = delta >= 0 ? 'ticker-up' : 'ticker-down';
-      return `<span class="ticker-item">
-        <img src="${c.image}" alt="${c.symbol}" width="18" height="18" style="border-radius:50%;"/>
-        <b>${c.symbol.toUpperCase()}</b> $${fmt(c.current_price, 4)}
-        <span class="${cls}">${delta ? delta.toFixed(2) : '0.00'}%</span>
-      </span>`;
-    });
-    // duplicate (for seamless looping)
-    $('#ticker').innerHTML = items.join('') + items.join('');
-  } catch (e) {
-    console.error(e);
-    $('#ticker').innerHTML = `<span class="ticker-item">Không tải được giá coin.</span>`;
+  const saved = localStorage.getItem("tp-theme");
+  if(saved === "light" || saved === "dark"){
+    root.setAttribute("data-theme", saved);
+  }else{
+    // default dark
+    root.setAttribute("data-theme", "dark");
+  }
+  updateIcon();
+
+  btn.addEventListener("click", ()=>{
+    const cur = root.getAttribute("data-theme");
+    const next = cur === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("tp-theme", next);
+    updateIcon();
+  });
+
+  function updateIcon(){
+    const cur = root.getAttribute("data-theme");
+    const isLight = cur === "light";
+    sun.hidden  = isLight; // hiển thị moon ở light
+    moon.hidden = !isLight;
+  }
+})();
+
+/* ======= TOP COIN TICKER (Binance WS + CoinGecko fallback) ======= */
+const TOP_SYMBOLS = [
+  "BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT",
+  "ADAUSDT","DOGEUSDT","TRXUSDT","TONUSDT","DOTUSDT",
+  "AVAXUSDT","SHIBUSDT","LINKUSDT","BCHUSDT","LTCUSDT",
+  "MATICUSDT","UNIUSDT","XLMUSDT","NEARUSDT","ATOMUSDT"
+];
+const CG_IDS = {
+  BTCUSDT:"bitcoin", ETHUSDT:"ethereum", BNBUSDT:"binancecoin", SOLUSDT:"solana",
+  XRPUSDT:"ripple", ADAUSDT:"cardano", DOGEUSDT:"dogecoin", TRXUSDT:"tron",
+  TONUSDT:"the-open-network", DOTUSDT:"polkadot", AVAXUSDT:"avalanche-2",
+  SHIBUSDT:"shiba-inu", LINKUSDT:"chainlink", BCHUSDT:"bitcoin-cash",
+  LTCUSDT:"litecoin", MATICUSDT:"polygon", UNIUSDT:"uniswap", XLMUSDT:"stellar",
+  NEARUSDT:"near", ATOMUSDT:"cosmos"
+};
+const $tickerTrack = document.getElementById("ticker-track");
+let ws, wsAlive = false;
+
+function renderTickerSkeleton(){
+  const ph = TOP_SYMBOLS.slice(0,10).map(s=>(
+    `<span class="ticker__item">
+      <span class="ticker__sym">${s.replace("USDT","")}</span>
+      <span class="ticker__price">…</span>
+      <span class="ticker__pct">…</span>
+    </span>`
+  )).join("");
+  $tickerTrack.innerHTML = ph + ph;
+}
+renderTickerSkeleton();
+
+function connectBinanceWS(){
+  try{
+    ws = new WebSocket("wss://stream.binance.com:9443/ws/!ticker@arr");
+    ws.onopen  = ()=>{ wsAlive = true; };
+    ws.onclose = ()=>{ wsAlive = false; setTimeout(connectBinanceWS, 8000); };
+    ws.onerror = ()=>{ wsAlive = false; };
+    ws.onmessage = (ev)=>{
+      const arr = JSON.parse(ev.data);
+      const picks = [];
+      for(const t of arr){
+        if(TOP_SYMBOLS.includes(t.s)){
+          picks.push({ sym:t.s, price:Number(t.c), pct:Number(t.P) });
+        }
+      }
+      if(picks.length) renderTicker(picks);
+    };
+  }catch(e){
+    wsAlive = false; fetchTickerFallback();
   }
 }
 
-/* ===== Crypto News (4 newest + hot flag) =====
-   Source: CryptoCompare top news (no API key)
-*/
-async function loadNews() {
-  const list = $('#news-list');
-  const empty = $('#news-empty');
-  empty.classList.add('hidden');
-  list.innerHTML = '';
+async function fetchTickerFallback(){
+  try{
+    const ids = TOP_SYMBOLS.map(s=>CG_IDS[s]).join(",");
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
+    const r = await fetch(url,{cache:"no-store"});
+    if(!r.ok) throw new Error("cg");
+    const j = await r.json();
+    const picks = TOP_SYMBOLS.map(s=>{
+      const o = j[CG_IDS[s]];
+      return o ? { sym:s, price:+o.usd, pct:+o.usd_24h_change } : null;
+    }).filter(Boolean);
+    if(picks.length) renderTicker(picks);
+  }catch(_){}
+}
 
-  try {
-    const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN', { cache: 'no-store' });
-    if (!res.ok) throw new Error('News fetch failed');
-    const json = await res.json();
-    const articles = (json?.Data || [])
-      .filter(a => a.title && a.url)
-      .sort((a,b) => b.published_on - a.published_on)  // newest
-      .slice(0, 4);                                    // only 4
+function renderTicker(list){
+  const by = new Map(list.map(i=>[i.sym,i]));
+  const ordered = TOP_SYMBOLS.map(s=>by.get(s)).filter(Boolean).slice(0,20);
+  const nf = new Intl.NumberFormat("en-US",{ maximumFractionDigits:4 });
 
-    if (!articles.length) throw new Error('No news');
+  const html = ordered.map(o=>{
+    const name = o.sym.replace("USDT","");
+    const up = o.pct >= 0;
+    const priceStr = (o.price >= 100) ? nf.format(o.price)
+                    : (o.price >= 1 ? o.price.toFixed(2) : o.price.toPrecision(3));
+    const pctStr = (up?"+":"") + o.pct.toFixed(2) + "%";
+    return `<span class="ticker__item">
+      <span class="ticker__sym">${name}</span>
+      <span class="ticker__price">$${priceStr}</span>
+      <span class="ticker__pct ${up?"up":"down"}">${pctStr}</span>
+    </span>`;
+  }).join("");
 
-    const html = articles.map(a => {
-      const t = new Date(a.published_on * 1000);
-      const when = t.toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' });
-      const img = a.imageurl || 'https://cryptocompare.com/media/37746251/cryptocompare.png';
-      return `<article class="card news-card">
-        <img class="news-img" src="${img}" alt="">
-        <div>
-          <a href="${a.url}" target="_blank" rel="noopener">
-            <h3 style="margin:.2rem 0;">${clip(a.title, 120)}</h3>
-          </a>
-          <p class="muted" style="margin:.2rem 0;">${clip(a.body, 160)}</p>
+  $tickerTrack.innerHTML = html + html; // loop vô hạn
+}
+
+connectBinanceWS();
+setInterval(()=>{ if(!wsAlive) fetchTickerFallback(); }, 20000);
+
+/* ====== Crypto News (4 bài mới & hot) ====== */
+/**
+ * Dùng RSS qua rss2json làm lớp chống CORS (free, rate-limit nhẹ).
+ * Gộp nhiều nguồn -> sort theo pubDate -> chọn 4 bài.
+ */
+const RSS_SOURCES = [
+  // cointelegraph, coindesk, decrypt
+  "https://cointelegraph.com/rss",
+  "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml",
+  "https://decrypt.co/feed"
+];
+
+const $news = document.getElementById("news-list");
+const $reloadBtn = document.getElementById("btnReloadNews");
+
+async function loadNews(){
+  $news.innerHTML = `<div class="card" style="grid-column:1/-1"><p class="muted">Đang tải tin…</p></div>`;
+  try{
+    const all = [];
+    for(const src of RSS_SOURCES){
+      const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src)}`;
+      const r = await fetch(url, {cache:"no-store"});
+      if(!r.ok) continue;
+      const j = await r.json();
+      if(j && Array.isArray(j.items)){
+        j.items.forEach(it=>{
+          all.push({
+            title: it.title,
+            link: it.link,
+            pub: new Date(it.pubDate || it.pubdate || it.date || Date.now()),
+            source: (j.feed && j.feed.title) || "Source",
+            thumb: it.enclosure?.link || it.thumbnail || ""
+          });
+        });
+      }
+    }
+    all.sort((a,b)=>b.pub - a.pub);
+    const picks = all.slice(0, 4);
+    if(!picks.length) throw new Error("no news");
+
+    $news.innerHTML = picks.map(n=>`
+      <a class="news-card" href="${n.link}" target="_blank" rel="noopener">
+        <img src="${n.thumb || 'https://images.unsplash.com/photo-1649180551741-6a3df9b21965?q=80&w=600&auto=format&fit=crop'}" alt="">
+        <div class="news-body">
+          <h4 class="title">${escapeHTML(n.title)}</h4>
           <div class="news-meta">
-            <span class="badge-news">${a.source_info?.name || 'Source'}</span>
-            <span>${when}</span>
+            <span>${n.source || "News"}</span>
+            <time>${timeAgo(n.pub)}</time>
           </div>
         </div>
-      </article>`;
-    }).join('');
-
-    list.innerHTML = html;
-  } catch (e) {
-    console.error(e);
-    empty.classList.remove('hidden');
+      </a>
+    `).join("");
+  }catch(err){
+    $news.innerHTML = `<div class="card" style="grid-column:1/-1"><p>Không tải được tin tức. Thử lại sau.</p></div>`;
   }
 }
+$reloadBtn.addEventListener("click", loadNews);
+document.addEventListener("DOMContentLoaded", loadNews);
 
-/* ===== Events ===== */
-$('#reloadNews').addEventListener('click', loadNews);
-
-/* ===== Boot ===== */
-loadTicker();
-loadNews();
-
-/* Refresh ticker every 60s */
-setInterval(loadTicker, 60_000);
+/* ===== helpers ===== */
+function timeAgo(date){
+  const s = Math.floor((Date.now() - date.getTime())/1000);
+  const m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+  if(d>0) return `${d}d trước`; if(h>0) return `${h}h trước`; if(m>0) return `${m}m trước`; return `vừa xong`;
+}
+function escapeHTML(str){return str.replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]))}

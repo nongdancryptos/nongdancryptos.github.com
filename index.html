@@ -1,258 +1,232 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TieuPhu • Airdrop & Crypto News</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif">
-  <meta name="description" content="TieuPhu • Airdrop hunter • Crypto news dashboard • MMO • Tools">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TieuPhu — Airdrop • MMO • Crypto</title>
+  <meta name="description" content="Trang cá nhân TieuPhu | Airdrop • MMO • Proxy • Crypto News" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="container row space">
-      <div class="brand">
-        <img class="brand__logo" src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif" alt="logo">
-        <div>
-          <div class="brand__title">TieuPhu</div>
-          <div class="brand__subtitle">Airdrop • MMO • Crypto</div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button id="btnAbout" class="btn-ghost" aria-haspopup="dialog" aria-controls="aboutModal">Giới thiệu</button>
-        <a class="btn" target="_blank" href="https://t.me/OnTopAirdrop">Telegram</a>
-        <a class="btn-outline" target="_blank" href="https://github.com/nongdancryptos">GitHub</a>
-      </div>
-    </div>
-
-    <!-- Search / Filters -->
-    <div class="container toolbar">
-      <div class="search">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16a6.471 6.471 0 004.23-1.57l.27.28v.79L20 21.5 21.5 20l-6-6zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        <input id="q" type="search" placeholder="Tìm bài viết, token, sàn…">
-      </div>
-      <div class="toolbar__right">
-        <label class="select">
-          <select id="sourceFilter">
-            <option value="">Tất cả nguồn</option>
-          </select>
-          <span></span>
-        </label>
-        <label class="select">
-          <select id="sortBy">
-            <option value="latest">Mới nhất</option>
-            <option value="oldest">Cũ nhất</option>
-          </select>
-          <span></span>
-        </label>
-      </div>
-    </div>
-
-    <!-- ===== Crypto Ticker ===== -->
-    <div class="ticker-wrap">
-      <div id="ticker" class="ticker"></div>
+  <!-- ===== NAVBAR ===== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <span class="logo">TP</span>
+        <span class="brand-text">TieuPhu</span>
+      </a>
+      <nav class="menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#proxy">Proxy</a>
+        <a href="#news">News</a>
+        <a href="about.html" class="btn ghost sm">About page</a>
+      </nav>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero container">
-    <div class="hero__text">
-      <h1>Airdrop Hunter & Crypto Radar</h1>
-      <p>
-        Mình là <strong>TieuPhu</strong> – theo dõi thị trường, săn airdrop có hệ thống và chia sẻ công cụ cho cộng đồng.
-        Trang này tổng hợp <b>tin tức crypto</b> từ nhiều nguồn uy tín, kèm <b>giá top 20</b> cập nhật theo thời gian thực.
-      </p>
-      <ul class="bullets">
-        <li>📰 News tổng hợp: CoinDesk, Cointelegraph, The Block, Decrypt…</li>
-        <li>📊 Ticker giá realtime (CoinGecko) – pause khi rê chuột.</li>
-        <li>🔐 Tips an toàn khi làm airdrop + kênh liên hệ hỗ trợ.</li>
-      </ul>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <div class="pill">Airdrop • MMO • On-chain</div>
+        <h1>Hello <span class="gradient">Programmer</span>, I'm <span class="accent">TieuPhu</span></h1>
+        <p class="muted">“Do your best – Play hard – Keep improving.”  
+          Mình đam mê công nghệ, tối ưu hoá công việc và kiếm tiền online. Ở đây bạn sẽ tìm thấy thông tin airdrop, tool, proxy và cập nhật crypto.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="https://github.com/nongdancryptos/nongdancryptos/blob/main/images/Developer.gif?raw=true" alt="Developer" />
+      </div>
     </div>
-    <div class="hero__media">
-      <img src="https://github.com/user-attachments/assets/2d1c7b36-d6f8-476f-8003-2dc3e34f78c3" alt="hero">
+    <!-- ===== LIVE TICKER: Top 20 ===== -->
+    <div class="ticker-wrap">
+      <div id="ticker" class="ticker"></div>
     </div>
   </section>
 
-  <!-- ===== Crypto News Grid ===== -->
-  <main class="container">
-    <div class="section-head">
-      <h2>Tin tức Crypto</h2>
-      <div class="muted">Tự động kéo RSS, làm sạch & hiển thị thẻ đẹp mắt.</div>
-    </div>
+  <!-- ===== ABOUT (từ README, rút gọn & trình bày lại) ===== -->
+  <section id="about" class="section">
+    <div class="container">
+      <header class="section-head">
+        <h2>About Me</h2>
+        <p class="muted">Tổng hợp profile, liên hệ và một phần portfolio.</p>
+      </header>
 
-    <div id="newsGrid" class="grid">
-      <div class="card skeleton"></div>
-      <div class="card skeleton"></div>
-      <div class="card skeleton"></div>
-      <div class="card skeleton"></div>
-      <div class="card skeleton"></div>
-      <div class="card skeleton"></div>
-    </div>
-  </main>
-
-  <!-- ===== Resources ===== -->
-  <section class="container">
-    <div class="section-head">
-      <h2>Tài nguyên cho anh em làm airdrop</h2>
-    </div>
-    <div class="resource">
-      <div>
-     <!-- PROXYSIEURE: Giới thiệu dịch vụ proxy -->
-<section id="proxy" class="section">
-  <div class="container">
-    <header class="section-head">
-      <h2 class="title">proxysieure.com — Proxy ổn định cho airdrop & automation</h2>
-      <p class="muted">
-        IP sạch, uptime cao, xoay IP mượt — hỗ trợ cả <b>Residential / Datacenter / ISP</b>, phù hợp cày airdrop, MMO, tool, và bảo mật tài khoản.
-      </p>
-    </header>
-
-    <!-- USP Cards -->
-    <div class="grid grid-4">
-      <div class="card">
-        <h3>IP sạch & đa dạng</h3>
-        <p>Hỗ trợ nhiều quốc gia/khu vực, chọn IP theo nhu cầu, whitelist IP hoặc user/pass auth.</p>
-      </div>
-      <div class="card">
-        <h3>Rotating / Static</h3>
-        <p>Rotating theo thời gian/requests, static ổn định cho KYC/đăng nhập quan trọng.</p>
-      </div>
-      <div class="card">
-        <h3>API & Dashboard</h3>
-        <p>Quản lý cổng, reset, lưu logs; API giúp tích hợp nhanh với bot/script.</p>
-      </div>
-      <div class="card">
-        <h3>Uptime 99.9%</h3>
-        <p>Hạ tầng ổn định, băng thông cao, tốc độ tốt cho automation & multi-account.</p>
-      </div>
-    </div>
-
-    <!-- Pricing (tóm tắt) -->
-    <div class="card mt-16">
-      <div class="flex-between flex-wrap">
-        <h3 class="mb-8">Gói dịch vụ</h3>
-        <a class="btn" href="https://proxysieure.com" target="_blank" rel="noopener">Mua ngay tại proxysieure.com</a>
-      </div>
-      <div class="grid grid-3 mt-8">
-        <div class="price">
-          <h4>Residential</h4>
-          <p class="muted">IP xoay toàn cầu, phù hợp cày airdrop & crawling.</p>
-          <div class="tag">Từ —/GB</div>
+      <div class="grid g-2">
+        <div class="card glass">
+          <h3>Giới thiệu nhanh</h3>
+          <ul class="list">
+            <li>👋 Mình là <b>TieuPhu</b>, thích khám phá cái mới & tối ưu hiệu quả.</li>
+            <li>🔍 Quan tâm: công nghệ, airdrop, bot/script, MMO.</li>
+            <li>🚀 Châm ngôn: “Do your best – Play hard – Keep improving.”</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Airdrop</span>
+            <span class="chip">Automation</span>
+            <span class="chip">On-chain</span>
+            <span class="chip">Web Scraping</span>
+            <span class="chip">Security</span>
+          </div>
         </div>
-        <div class="price">
-          <h4>Datacenter</h4>
-          <p class="muted">Tối ưu chi phí, tốc độ cao, ổn định cho tool.</p>
-          <div class="tag">Từ —/tháng</div>
-        </div>
-        <div class="price">
-          <h4>ISP / Static</h4>
-          <p class="muted">IP bền, trust cao cho đăng nhập & KYC.</p>
-          <div class="tag">Từ —/port</div>
+
+        <div class="card glass">
+          <h3>Liên hệ</h3>
+          <div class="links">
+            <a class="link" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">Telegram</a>
+            <a class="link" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
+            <a class="link" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+            <a class="link" href="mailto:nongdancryptos@gmail.com">Email</a>
+          </div>
+          <div class="support">
+            <a class="btn sm" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">☕ Ủng hộ</a>
+            <a class="btn sm ghost" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+          </div>
         </div>
       </div>
-      <small class="muted">*Giá có thể thay đổi theo khu vực & dung lượng. Xem chi tiết trên website.</small>
     </div>
+  </section>
 
-    <!-- How to Use -->
-    <div class="grid grid-2 mt-16">
-      <div class="card">
-        <h3>Cách tích hợp nhanh</h3>
-        <ol class="steps">
-          <li>Đăng ký & tạo cổng tại <a href="https://proxysieure.com" target="_blank" rel="noopener">proxysieure.com</a>.</li>
-          <li>Chọn quốc gia, chế độ Rotating/Static, whitelist IP hoặc user/pass.</li>
-          <li>Dán endpoint vào tool (HTTP/SOCKS5), test kết nối, triển khai.</li>
-        </ol>
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="section">
+    <div class="container">
+      <header class="section-head">
+        <h2>Skills & Tech</h2>
+        <p class="muted">Một vài công nghệ mình thường dùng / đang mở rộng.</p>
+      </header>
+
+      <div class="grid g-3">
+        <div class="card glass">
+          <h3>Ngôn ngữ</h3>
+          <p>Python, JavaScript/TypeScript, Node.js, PHP, Go, Bash</p>
+        </div>
+        <div class="card glass">
+          <h3>Quan tâm</h3>
+          <p>Blockchain, Web Scraping, Ethical Hacking, Bot/Script, MMO</p>
+        </div>
+        <div class="card glass">
+          <h3>Đang học thêm</h3>
+          <p>C/C++, C#, Rust, Java</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Ví dụ cấu hình</h3>
-        <pre class="code small"><code># HTTP proxy (user:pass)
+    </div>
+  </section>
+
+  <!-- ===== PROXY (được thiết kế lại) ===== -->
+  <section id="proxy" class="section">
+    <div class="container">
+      <header class="section-head">
+        <h2>proxysieure.com — Proxy cho Airdrop & Automation</h2>
+        <p class="muted">IP sạch, uptime cao, xoay IP linh hoạt. Phù hợp claim, nhiệm vụ on-chain, multi-account & bảo mật.</p>
+      </header>
+
+      <div class="grid g-4">
+        <div class="card glass">
+          <h3>IP sạch & đa GEO</h3>
+          <p>Chọn quốc gia/khu vực, whitelist IP hoặc user/pass.</p>
+        </div>
+        <div class="card glass">
+          <h3>Rotating / Static</h3>
+          <p>Chọn theo nhu cầu: đổi IP theo thời gian/requests hoặc giữ IP cố định.</p>
+        </div>
+        <div class="card glass">
+          <h3>API & Dashboard</h3>
+          <p>Quản lý cổng, reset, logs; tích hợp nhanh với bot/script.</p>
+        </div>
+        <div class="card glass">
+          <h3>Uptime 99.9%</h3>
+          <p>Hạ tầng ổn định, tốc độ cao cho automation.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2 mt">
+        <div class="card glass">
+          <h3>Gói tóm tắt</h3>
+          <div class="price-row">
+            <div class="price">
+              <h4>Residential</h4>
+              <span class="tag">Theo GB</span>
+            </div>
+            <div class="price">
+              <h4>Datacenter</h4>
+              <span class="tag">Theo tháng</span>
+            </div>
+            <div class="price">
+              <h4>ISP / Static</h4>
+              <span class="tag">Theo port</span>
+            </div>
+          </div>
+          <small class="muted">*Giá thay đổi theo khu vực & dung lượng — xem chi tiết trên website.</small>
+        </div>
+
+        <div class="card glass">
+          <h3>Endpoint mẫu</h3>
+          <pre class="code"><code># HTTP proxy (user:pass)
 http://username:password@gateway.proxysieure.com:PORT
 
 # SOCKS5 proxy (whitelist IP)
 socks5://gateway.proxysieure.com:PORT</code></pre>
-        <button class="btn ghost" data-copy="#copy-proxy">Copy mẫu endpoint</button>
-        <textarea id="copy-proxy" class="sr-only">http://username:password@gateway.proxysieure.com:PORT</textarea>
+          <button class="btn sm" data-copy="#copy-proxy">Copy endpoint</button>
+          <textarea id="copy-proxy" class="sr-only">http://username:password@gateway.proxysieure.com:PORT</textarea>
+        </div>
       </div>
-    </div>
 
-    <!-- FAQ -->
-    <div class="card mt-16">
-      <h3>FAQ nhanh</h3>
-      <details>
-        <summary>Proxy có dùng được cho airdrop không?</summary>
-        <p>Có. Nhiều người dùng cho việc claim, nhiệm vụ on-chain, cũng như bảo vệ tài khoản khi làm MMO.</p>
-      </details>
-      <details>
-        <summary>Hỗ trợ quốc gia nào?</summary>
-        <p>Nhiều tuỳ chọn GEO. Xem danh sách cập nhật trực tiếp trên website.</p>
-      </details>
-      <details>
-        <summary>Rotating bao lâu?</summary>
-        <p>Tuỳ gói (theo thời gian/requests). Bạn có thể đổi IP chủ động qua dashboard/API.</p>
-      </details>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta mt-16">
-      <div>
-        <h3>Bắt đầu với proxysieure.com</h3>
-        <p class="muted">Đăng ký nhanh — nhận IP sạch ngay để tối ưu tỉ lệ & tốc độ làm việc.</p>
-      </div>
-      <a class="btn large" href="https://proxysieure.com" target="_blank" rel="noopener">Truy cập website</a>
-    </div>
-  </div>
-</section>
-
-      </div>
-      <div>
-        <h3>Liên hệ</h3>
-        <p>Telegram: <a href="https://t.me/OnTopAirdrop" target="_blank">@OnTopAirdrop</a><br>
-           Email: <a href="mailto:nongdancryptos@gmail.com">nongdancryptos@gmail.com</a></p>
-        <p>Ủng hộ: PayPal / Binance Pay / QR ví (xem trong phần Giới thiệu).</p>
+      <div class="cta">
+        <div>
+          <h3>Bắt đầu với proxysieure.com</h3>
+          <p class="muted">Đăng ký — nhận IP sạch ngay để tối ưu tỉ lệ & tốc độ làm việc.</p>
+        </div>
+        <a class="btn" href="https://proxysieure.com" target="_blank" rel="noopener">Truy cập website</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="container row space">
-      <div class="muted">© <span id="y"></span> TieuPhu • Build for community</div>
-      <div class="muted">Made with ♥ • Dark-first UI</div>
+  <!-- ===== CRYPTO NEWS ===== -->
+  <section id="news" class="section">
+    <div class="container">
+      <header class="section-head">
+        <h2>Crypto News</h2>
+        <p class="muted">Tin nhanh về thị trường, dự án, hệ sinh thái.</p>
+      </header>
+
+      <div id="news-list" class="news-grid">
+        <!-- News cards will be injected here -->
+      </div>
+      <div class="center mt">
+        <button id="reload-news" class="btn ghost sm">Tải lại tin</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container f-inner">
+      <div class="brand-row">
+        <span class="logo">TP</span>
+        <strong>TieuPhu</strong>
+      </div>
+      <nav class="f-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#proxy">Proxy</a>
+        <a href="#news">News</a>
+        <a href="about.html">About page</a>
+      </nav>
+      <p class="muted">© <span id="y"></span> TieuPhu — Made with 💻 & ☕</p>
     </div>
   </footer>
 
-  <!-- ===== Modal Giới thiệu (load about.html) ===== -->
-  <div id="aboutModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal__backdrop" data-close></div>
-    <div class="modal__dialog" role="document">
-      <button class="modal__close" title="Đóng" data-close>&times;</button>
-      <div class="modal__header">
-        <h3 class="modal__title">Giới thiệu</h3>
-      </div>
-      <div id="aboutBody" class="modal__body">
-        <div class="modal__loading">Đang tải nội dung…</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Config -->
-  <script>
-    window.APP_CONFIG = {
-      aboutFile: "about.html",
-      coinsRefreshSec: 60,
-      // dùng r.jina.ai để bypass CORS khi đọc RSS
-      rssSources: [
-        { name: "CoinDesk",       url: "https://r.jina.ai/http://feeds.feedburner.com/CoinDesk" },
-        { name: "Cointelegraph",  url: "https://r.jina.ai/http://rss.cointelegraph.com/" },
-        { name: "The Block",      url: "https://r.jina.ai/https://www.theblock.co/rss" },
-        { name: "Decrypt",        url: "https://r.jina.ai/https://decrypt.co/feed" }
-      ],
-      maxNews: 18
-    };
-  </script>
   <script src="app.js"></script>
 </body>
 </html>

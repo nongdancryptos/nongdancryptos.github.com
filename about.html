@@ -1,68 +1,168 @@
-<!-- about.html (fragment tối giản, để chèn vào modal) -->
-<section>
-  <div style="display:flex;gap:12px;align-items:center;">
-    <img src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif" alt="avatar" width="64" height="64" style="border-radius:10px">
-    <div>
-      <h2 style="margin:0">TieuPhu</h2>
-      <small>Airdrop • Crypto • MMO • Automation</small>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — TieuPhu</title>
+  <meta name="description" content="About TieuPhu — Airdrop • Crypto • MMO • Automation" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header đồng bộ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="badge">TP</span>
+        <span class="brand-text">TieuPhu</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#contact">Liên hệ</a>
+        <a class="btn btn--sm" href="index.html">Trang chủ</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <p style="margin:12px 0 0;">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Tourney&weight=900&size=20&pause=1000&color=F74609FF&center=false&vCenter=true&repeat=false&width=420&lines=Hello%2C+I'm+TieuPhu" alt="Typing">
-  </p>
+  <main class="container" style="padding:42px 0;">
+    <!-- Profile Header -->
+    <section class="section">
+      <div class="card">
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+          <img src="https://raw.githubusercontent.com/nongdancryptos/nongdancryptos/main/images/Developer.gif" alt="avatar"
+               width="64" height="64" style="border-radius:10px">
+          <div>
+            <h2 style="margin:0">TieuPhu</h2>
+            <p class="muted" style="margin:.1rem 0 0">Airdrop • Crypto • MMO • Automation</p>
+          </div>
+        </div>
 
-  <hr style="border:0;border-top:1px solid #1a2431;margin:12px 0">
+        <div style="margin-top:12px;">
+          <img
+            src="https://readme-typing-svg.herokuapp.com?font=Tourney&weight=900&size=20&pause=1000&color=F74609FF&center=false&vCenter=true&repeat=false&width=420&lines=Hello%2C+I'm+TieuPhu"
+            alt="Typing" />
+        </div>
+      </div>
+    </section>
 
-  <h3>👋 About Me</h3>
-  <ul>
-    <li>Mình là <b>TieuPhu</b> — thích khám phá, tối ưu workflow, kiếm tiền online thông minh.</li>
-    <li>Motto: <i>Do your best – Play hard – Keep improving.</i></li>
-    <li>Quan tâm: công nghệ, airdrop, automation, MMO.</li>
-  </ul>
+    <!-- About + Contact -->
+    <section class="section">
+      <div class="grid grid-2 grid-responsive">
+        <div class="card">
+          <h3>👋 About Me</h3>
+          <ul class="list">
+            <li>Mình là <b>TieuPhu</b> — thích khám phá, tối ưu workflow, kiếm tiền online thông minh.</li>
+            <li>Motto: <i>Do your best – Play hard – Keep improving.</i></li>
+            <li>Quan tâm: công nghệ, airdrop, automation, MMO.</li>
+          </ul>
+        </div>
 
-  <h3>🔗 Liên hệ nhanh</h3>
-  <p style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;">
-    <a class="btn ghost" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">Telegram</a>
-    <a class="btn ghost" href="mailto:nongdancryptos@gmail.com">Email</a>
-    <a class="btn ghost" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X (Twitter)</a>
-    <a class="btn ghost" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
-  </p>
+        <div class="card">
+          <h3>🔗 Liên hệ nhanh</h3>
+          <div class="social-grid" style="margin-top:.4rem;">
+            <a class="btn-social tg" href="https://t.me/OnTopAirdrop" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.0 14.8l-.3 4.3c.4 0 .6-.2.9-.4l2.1-1.9 4.4 3.2c.8.4 1.4.2 1.6-.7l2.9-13.6c.3-1.2-.4-1.7-1.2-1.4L2.8 10.1c-1.2.5-1.2 1.2-.2 1.5l4.2 1.3 9.8-6.2c.5-.3.9-.1.5.2"/></svg>
+              Telegram
+            </a>
+            <a class="btn-social mail" href="mailto:nongdancryptos@gmail.com">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Email
+            </a>
+            <a class="btn-social x" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h3l-7.5 8.6L22 22h-6.4l-5-6.8L4 22H1l8.2-9.5L2 2h6.4l4.6 6.2L18 2z"/></svg>
+              X (Twitter)
+            </a>
+            <a class="btn-social gh" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2c-3.3.7-4-1.5-4-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.7 2 2.9 1.4.1-.8.5-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-6a4.7 4.7 0 0 1 1.2-3.2c-.1-.3-.5-1.6.1-3.4 0 0 1-.3 3.3 1.2a11.1 11.1 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.8.2 3.1.1 3.4.8.9 1.2 2 1.2 3.2 0 4.7-2.8 5.7-5.4 6 .4.3.9 1 .9 2v3c0 .3.2.7.8.6A12.2 12.2 0 0 0 24 12.7 12 12 0 0 0 12 .5z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h3>🛠 Kỹ năng</h3>
-  <p>Shell, PHP, Python, JavaScript/TypeScript, Node.js, Go, Ruby, Perl, Lua, Java, Rust. Đang mở rộng: C, C#, C++.</p>
-  <p>Sở thích: Web Scraping, Blockchain, Ethical Hacking, Hackintosh, Bot Script.</p>
+    <!-- Skills -->
+    <section class="section">
+      <div class="card">
+        <h3>🛠 Kỹ năng</h3>
+        <p>Shell, PHP, Python, JavaScript/TypeScript, Node.js, Go, Ruby, Perl, Lua, Java, Rust.</p>
+        <p class="muted">Đang mở rộng: C, C#, C++.</p>
+        <div class="tags" style="margin-top:.4rem;">
+          <span class="tag">Web Scraping</span>
+          <span class="tag">Blockchain</span>
+          <span class="tag">Ethical Hacking</span>
+          <span class="tag">Hackintosh</span>
+          <span class="tag">Bot Script</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+    </section>
 
-  <h3>📊 Thống kê GitHub</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
-    <a href="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" target="_blank" rel="noopener">
-      <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" alt="stats" style="width:100%;height:auto">
-    </a>
-    <a href="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" target="_blank" rel="noopener">
-      <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" alt="streak" style="width:100%;height:auto">
-    </a>
-    <a href="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" target="_blank" rel="noopener">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" alt="top-langs" style="width:100%;height:auto">
-    </a>
-  </div>
+    <!-- Github stats -->
+    <section class="section">
+      <h3 style="margin:0 0 .6rem;">📊 Thống kê GitHub</h3>
+      <div class="grid grid-responsive">
+        <a class="card" href="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" target="_blank" rel="noopener">
+          <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=vision-friendly-dark&rank_icon=github" alt="stats">
+        </a>
+        <a class="card" href="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" target="_blank" rel="noopener">
+          <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=false" alt="streak">
+        </a>
+        <a class="card" href="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" target="_blank" rel="noopener">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nongdancryptos&layout=compact&hide_progress=false&theme=highcontrast" alt="top-langs">
+        </a>
+      </div>
+    </section>
 
-  <h3>☕ Ủng hộ</h3>
-  <p style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;">
-    <a class="btn" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
-    <a class="btn ghost" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
-  </p>
-  <ul>
-    <li><b>ETH / POL (EVM):</b> 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
-    <li><b>BTC:</b> bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
-    <li><b>SOL:</b> 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
-    <li><b>SUI:</b> 0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</li>
-    <li><b>Binance Pay ID:</b> 518668773</li>
-  </ul>
+    <!-- Donate -->
+    <section class="section">
+      <div class="grid grid-2 grid-responsive">
+        <div class="card">
+          <h3>☕ Ủng hộ</h3>
+          <div class="donate">
+            <a class="btn" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">Ko-fi</a>
+            <a class="btn btn--ghost" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">PayPal</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>💸 Địa chỉ</h3>
+          <ul class="list">
+            <li><b>ETH / POL (EVM):</b> 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</li>
+            <li><b>BTC:</b> bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</li>
+            <li><b>SOL:</b> 7PterKBwtNdYNu8nftAKpn6ke8GdCkzyg5xUHp9EhGWx</li>
+            <li><b>SUI:</b> 0x0d43d68ca78ef074251f9265af0f7af3cc52b62daa9f44b918378f54728c7175</li>
+            <li><b>Binance Pay ID:</b> 518668773</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  <h3>🎯 Quote ngẫu nhiên</h3>
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" alt="quote" style="max-width:100%;height:auto">
+    <!-- Quote + Views -->
+    <section class="section">
+      <div class="grid grid-2 grid-responsive">
+        <div class="card">
+          <h3>🎯 Quote ngẫu nhiên</h3>
+          <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" alt="quote" style="max-width:100%;height:auto">
+        </div>
+        <div class="card center">
+          <h3 style="margin-top:0;">👀 Lượt xem</h3>
+          <img src="https://komarev.com/ghpvc/?username=nongdancryptos&&style=flat-square" alt="views" style="margin-inline:auto;">
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <div style="margin-top:12px;text-align:center;">
-    <img src="https://komarev.com/ghpvc/?username=nongdancryptos&&style=flat-square" alt="views">
-  </div>
-</section>
+  <!-- Footer đồng bộ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> TieuPhu — Airdrop • MMO • On-chain</p>
+      <a class="link" href="https://proxysieure.com" target="_blank" rel="noopener">proxysieure.com</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

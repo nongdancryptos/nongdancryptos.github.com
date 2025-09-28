@@ -1,191 +1,196 @@
-/* ===== Year in footer ===== */
-document.getElementById("y").textContent = new Date().getFullYear();
+/* ===== util ===== */
+const $ = (s, el=document) => el.querySelector(s);
+const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
 
-/* ===== Theme toggle (Light/Dark) ===== */
-(function initThemeToggle(){
+/* ===== theme toggle ===== */
+(() => {
   const root = document.documentElement;
-  const btn  = document.getElementById("themeToggle");
-  const sun  = document.getElementById("icon-sun");
-  const moon = document.getElementById("icon-moon");
+  const btn = $('#themeToggle');
+  const iconSun = $('#icon-sun');
+  const iconMoon = $('#icon-moon');
 
-  const saved = localStorage.getItem("tp-theme");
-  if(saved === "light" || saved === "dark"){
-    root.setAttribute("data-theme", saved);
-  }else{
-    // default dark
-    root.setAttribute("data-theme", "dark");
-  }
-  updateIcon();
+  const saved = localStorage.getItem('theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  const isLight = () => root.getAttribute('data-theme') === 'light';
+  const syncIcon = () => {
+    if (isLight()) { iconSun.hidden = true; iconMoon.hidden = false; }
+    else { iconSun.hidden = false; iconMoon.hidden = true; }
+  };
+  syncIcon();
 
-  btn.addEventListener("click", ()=>{
-    const cur = root.getAttribute("data-theme");
-    const next = cur === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    localStorage.setItem("tp-theme", next);
-    updateIcon();
+  btn.addEventListener('click', () => {
+    root.setAttribute('data-theme', isLight() ? 'dark' : 'light');
+    localStorage.setItem('theme', root.getAttribute('data-theme'));
+    syncIcon();
   });
-
-  function updateIcon(){
-    const cur = root.getAttribute("data-theme");
-    const isLight = cur === "light";
-    sun.hidden  = isLight; // hiển thị moon ở light
-    moon.hidden = !isLight;
-  }
 })();
 
-/* ======= TOP COIN TICKER (Binance WS + CoinGecko fallback) ======= */
-const TOP_SYMBOLS = [
-  "BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT",
-  "ADAUSDT","DOGEUSDT","TRXUSDT","TONUSDT","DOTUSDT",
-  "AVAXUSDT","SHIBUSDT","LINKUSDT","BCHUSDT","LTCUSDT",
-  "MATICUSDT","UNIUSDT","XLMUSDT","NEARUSDT","ATOMUSDT"
-];
-const CG_IDS = {
-  BTCUSDT:"bitcoin", ETHUSDT:"ethereum", BNBUSDT:"binancecoin", SOLUSDT:"solana",
-  XRPUSDT:"ripple", ADAUSDT:"cardano", DOGEUSDT:"dogecoin", TRXUSDT:"tron",
-  TONUSDT:"the-open-network", DOTUSDT:"polkadot", AVAXUSDT:"avalanche-2",
-  SHIBUSDT:"shiba-inu", LINKUSDT:"chainlink", BCHUSDT:"bitcoin-cash",
-  LTCUSDT:"litecoin", MATICUSDT:"polygon", UNIUSDT:"uniswap", XLMUSDT:"stellar",
-  NEARUSDT:"near", ATOMUSDT:"cosmos"
-};
-const $tickerTrack = document.getElementById("ticker-track");
-let ws, wsAlive = false;
+/* ===== footer year ===== */
+(() => { const y = new Date().getFullYear(); const el = document.getElementById('y'); if (el) el.textContent = y; })();
 
-function renderTickerSkeleton(){
-  const ph = TOP_SYMBOLS.slice(0,10).map(s=>(
-    `<span class="ticker__item">
-      <span class="ticker__sym">${s.replace("USDT","")}</span>
-      <span class="ticker__price">…</span>
-      <span class="ticker__pct">…</span>
-    </span>`
-  )).join("");
-  $tickerTrack.innerHTML = ph + ph;
-}
-renderTickerSkeleton();
+/* ===== COIN TICKER (Top 20) ===== */
+(async () => {
+  const symbols = [
+    'BTCUSDT','ETHUSDT','BNBUSDT','SOLUSDT','XRPUSDT','USDCUSDT','DOGEUSDT','ADAUSDT','TRXUSDT','TONUSDT',
+    'AVAXUSDT','SHIBUSDT','DOTUSDT','WBTCUSDT','BCHUSDT','LINKUSDT','NEARUSDT','MATICUSDT','LTCUSDT','UNIUSDT'
+  ];
+  const elTrack = document.getElementById('ticker-track');
+  if (!elTrack) return;
 
-function connectBinanceWS(){
-  try{
-    ws = new WebSocket("wss://stream.binance.com:9443/ws/!ticker@arr");
-    ws.onopen  = ()=>{ wsAlive = true; };
-    ws.onclose = ()=>{ wsAlive = false; setTimeout(connectBinanceWS, 8000); };
-    ws.onerror = ()=>{ wsAlive = false; };
-    ws.onmessage = (ev)=>{
-      const arr = JSON.parse(ev.data);
-      const picks = [];
-      for(const t of arr){
-        if(TOP_SYMBOLS.includes(t.s)){
-          picks.push({ sym:t.s, price:Number(t.c), pct:Number(t.P) });
-        }
-      }
-      if(picks.length) renderTicker(picks);
-    };
-  }catch(e){
-    wsAlive = false; fetchTickerFallback();
-  }
-}
+  // build initial DOM items
+  const makeItem = (sym, p=0, chg=0) => {
+    const item = document.createElement('div');
+    item.className = `ti ${chg>=0?'up':'down'}`;
+    item.dataset.symbol = sym;
+    item.innerHTML = `<b>${sym.replace('USDT','')}</b><span>$${Number(p).toLocaleString()}</span><span class="chg">${chg>=0?'+':''}${chg.toFixed(2)}%</span>`;
+    return item;
+  };
+  const state = {}; // {SYM:{price, chg}}
+  symbols.forEach(s => { state[s] = {price:0, chg:0}; });
 
-async function fetchTickerFallback(){
-  try{
-    const ids = TOP_SYMBOLS.map(s=>CG_IDS[s]).join(",");
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
-    const r = await fetch(url,{cache:"no-store"});
-    if(!r.ok) throw new Error("cg");
-    const j = await r.json();
-    const picks = TOP_SYMBOLS.map(s=>{
-      const o = j[CG_IDS[s]];
-      return o ? { sym:s, price:+o.usd, pct:+o.usd_24h_change } : null;
-    }).filter(Boolean);
-    if(picks.length) renderTicker(picks);
-  }catch(_){}
-}
-
-function renderTicker(list){
-  const by = new Map(list.map(i=>[i.sym,i]));
-  const ordered = TOP_SYMBOLS.map(s=>by.get(s)).filter(Boolean).slice(0,20);
-  const nf = new Intl.NumberFormat("en-US",{ maximumFractionDigits:4 });
-
-  const html = ordered.map(o=>{
-    const name = o.sym.replace("USDT","");
-    const up = o.pct >= 0;
-    const priceStr = (o.price >= 100) ? nf.format(o.price)
-                    : (o.price >= 1 ? o.price.toFixed(2) : o.price.toPrecision(3));
-    const pctStr = (up?"+":"") + o.pct.toFixed(2) + "%";
-    return `<span class="ticker__item">
-      <span class="ticker__sym">${name}</span>
-      <span class="ticker__price">$${priceStr}</span>
-      <span class="ticker__pct ${up?"up":"down"}">${pctStr}</span>
-    </span>`;
-  }).join("");
-
-  $tickerTrack.innerHTML = html + html; // loop vô hạn
-}
-
-connectBinanceWS();
-setInterval(()=>{ if(!wsAlive) fetchTickerFallback(); }, 20000);
-
-/* ====== Crypto News (4 bài mới & hot) ====== */
-/**
- * Dùng RSS qua rss2json làm lớp chống CORS (free, rate-limit nhẹ).
- * Gộp nhiều nguồn -> sort theo pubDate -> chọn 4 bài.
- */
-const RSS_SOURCES = [
-  // cointelegraph, coindesk, decrypt
-  "https://cointelegraph.com/rss",
-  "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml",
-  "https://decrypt.co/feed"
-];
-
-const $news = document.getElementById("news-list");
-const $reloadBtn = document.getElementById("btnReloadNews");
-
-async function loadNews(){
-  $news.innerHTML = `<div class="card" style="grid-column:1/-1"><p class="muted">Đang tải tin…</p></div>`;
-  try{
-    const all = [];
-    for(const src of RSS_SOURCES){
-      const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src)}`;
-      const r = await fetch(url, {cache:"no-store"});
-      if(!r.ok) continue;
-      const j = await r.json();
-      if(j && Array.isArray(j.items)){
-        j.items.forEach(it=>{
-          all.push({
-            title: it.title,
-            link: it.link,
-            pub: new Date(it.pubDate || it.pubdate || it.date || Date.now()),
-            source: (j.feed && j.feed.title) || "Source",
-            thumb: it.enclosure?.link || it.thumbnail || ""
-          });
-        });
-      }
+  const render = () => {
+    elTrack.innerHTML = '';
+    // duplicate to create infinite scroll feel
+    for (let k=0;k<2;k++){
+      symbols.forEach(sym => {
+        const {price, chg} = state[sym];
+        elTrack.appendChild(makeItem(sym, price, chg));
+      });
     }
-    all.sort((a,b)=>b.pub - a.pub);
-    const picks = all.slice(0, 4);
-    if(!picks.length) throw new Error("no news");
+  };
 
-    $news.innerHTML = picks.map(n=>`
-      <a class="news-card" href="${n.link}" target="_blank" rel="noopener">
-        <img src="${n.thumb || 'https://images.unsplash.com/photo-1649180551741-6a3df9b21965?q=80&w=600&auto=format&fit=crop'}" alt="">
-        <div class="news-body">
-          <h4 class="title">${escapeHTML(n.title)}</h4>
-          <div class="news-meta">
-            <span>${n.source || "News"}</span>
-            <time>${timeAgo(n.pub)}</time>
-          </div>
-        </div>
-      </a>
-    `).join("");
-  }catch(err){
-    $news.innerHTML = `<div class="card" style="grid-column:1/-1"><p>Không tải được tin tức. Thử lại sau.</p></div>`;
+  // Fallback via CoinGecko simple price
+  const coingeckoIds = {
+    BTCUSDT:'bitcoin', ETHUSDT:'ethereum', BNBUSDT:'binancecoin', SOLUSDT:'solana', XRPUSDT:'ripple',
+    USDCUSDT:'usd-coin', DOGEUSDT:'dogecoin', ADAUSDT:'cardano', TRXUSDT:'tron', TONUSDT:'toncoin',
+    AVAXUSDT:'avalanche-2', SHIBUSDT:'shiba-inu', DOTUSDT:'polkadot', WBTCUSDT:'wrapped-bitcoin',
+    BCHUSDT:'bitcoin-cash', LINKUSDT:'chainlink', NEARUSDT:'near', MATICUSDT:'polygon', LTCUSDT:'litecoin', UNIUSDT:'uniswap'
+  };
+  async function loadFallback(){
+    try{
+      const ids = Object.values(coingeckoIds).join(',');
+      const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+      const json = await res.json();
+      for(const [sym,id] of Object.entries(coingeckoIds)){
+        const d = json[id];
+        if (!d) continue;
+        state[sym].price = d.usd;
+        state[sym].chg = d.usd_24h_change || 0;
+      }
+      render();
+    }catch(e){
+      console.warn('CoinGecko fallback error', e);
+    }
   }
-}
-$reloadBtn.addEventListener("click", loadNews);
-document.addEventListener("DOMContentLoaded", loadNews);
 
-/* ===== helpers ===== */
-function timeAgo(date){
-  const s = Math.floor((Date.now() - date.getTime())/1000);
-  const m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
-  if(d>0) return `${d}d trước`; if(h>0) return `${h}h trước`; if(m>0) return `${m}m trước`; return `vừa xong`;
-}
-function escapeHTML(str){return str.replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]))}
+  // Try Binance WS first
+  function openWS(){
+    const streams = symbols.map(s => s.toLowerCase()+'@ticker').join('/');
+    const ws = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${streams}`);
+
+    ws.onopen = () => {
+      // also first paint from fallback to avoid blank
+      loadFallback();
+    };
+    ws.onmessage = (ev) => {
+      const data = JSON.parse(ev.data);
+      if (!data || !data.data) return;
+      const t = data.data; // 24hr ticker
+      const s = t.s;
+      const last = parseFloat(t.c);
+      const chg = parseFloat(t.P); // percent
+      if (!Number.isFinite(last)) return;
+      state[s] = {price:last, chg: Number.isFinite(chg)? chg : 0};
+      // update minimal DOM (only first group)
+      const node = elTrack.querySelector(`.ti[data-symbol="${s}"]`);
+      if (node){
+        node.classList.toggle('up', chg>=0);
+        node.classList.toggle('down', chg<0);
+        node.innerHTML = `<b>${s.replace('USDT','')}</b><span>$${last.toLocaleString()}</span><span class="chg">${chg>=0?'+':''}${(chg||0).toFixed(2)}%</span>`;
+      }
+    };
+    ws.onerror = () => { ws.close(); };
+    ws.onclose = () => {
+      // fallback polling if WS fails
+      loadFallback();
+      setInterval(loadFallback, 15000);
+    };
+  }
+
+  render();
+  openWS();
+})();
+
+/* ===== CRYPTO NEWS (take 4 newest) ===== */
+(async () => {
+  const list = $('#news-list');
+  if (!list) return;
+
+  const FEEDS = [
+    'https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml',
+    'https://cointelegraph.com/rss',
+    'https://www.theblock.co/rss'
+  ];
+
+  // Use AllOrigins to bypass CORS
+  async function fetchFeed(url){
+    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+    const res = await fetch(proxy);
+    if (!res.ok) throw new Error('Feed error');
+    return res.text();
+  }
+
+  function parseRSS(xml){
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, 'text/xml');
+    const items = [...doc.querySelectorAll('item')].map(it => ({
+      title: it.querySelector('title')?.textContent?.trim() || '',
+      link: it.querySelector('link')?.textContent?.trim() || '',
+      pubDate: new Date(it.querySelector('pubDate')?.textContent || Date.now()),
+      source: doc.querySelector('channel > title')?.textContent || 'RSS'
+    }));
+    return items;
+  }
+
+  async function loadNews(){
+    list.innerHTML = '';
+    try{
+      const results = (await Promise.allSettled(FEEDS.map(fetchFeed)))
+        .filter(r => r.status === 'fulfilled')
+        .map(r => r.value)
+        .flatMap(parseRSS);
+
+      // sort by date desc, unique by link/title, then top 4
+      const seen = new Set();
+      const sorted = results
+        .sort((a,b)=> b.pubDate - a.pubDate)
+        .filter(it => {
+          const key = it.link || it.title;
+          if (seen.has(key)) return false;
+          seen.add(key); return true;
+        })
+        .slice(0,4);
+
+      if (sorted.length === 0) throw new Error('No items');
+
+      for (const it of sorted){
+        const card = document.createElement('article');
+        card.className = 'news-card';
+        const time = it.pubDate instanceof Date ? it.pubDate.toLocaleString() : '';
+        card.innerHTML = `
+          <a href="${it.link}" target="_blank" rel="noopener">
+            <h4>${it.title}</h4>
+          </a>
+          <div class="news-meta"><span>${it.source}</span> • <time>${time}</time></div>
+        `;
+        list.appendChild(card);
+      }
+    }catch(e){
+      console.warn('News error', e);
+      list.innerHTML = `<div class="card"><p class="muted">Không tải được tin. Vui lòng thử lại.</p></div>`;
+    }
+  }
+
+  $('#btnReloadNews')?.addEventListener('click', loadNews);
+  loadNews();
+})();

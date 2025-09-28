@@ -1,145 +1,94 @@
-// Year in footer
-document.getElementById('y').textContent = new Date().getFullYear();
+/* ===== Utils ===== */
+const $ = (s, p = document) => p.querySelector(s);
+const $$ = (s, p = document) => [...p.querySelectorAll(s)];
+const fmt = (n, d = 2) => {
+  if (n === null || n === undefined || isNaN(n)) return '-';
+  return Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
+};
+const clip = (str, n = 110) => (str?.length > n ? str.slice(0, n) + '…' : str || '');
 
-/* ---------------- Utils: fetch with timeout ---------------- */
-async function fetchWithTimeout(resource, options = {}) {
-  const { timeout = 12000 } = options; // 12s
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  try {
-    const resp = await fetch(resource, { ...options, signal: controller.signal });
-    clearTimeout(id);
-    return resp;
-  } catch (e) {
-    clearTimeout(id);
-    throw e;
-  }
-}
+/* ===== Year in footer ===== */
+$('#year').textContent = new Date().getFullYear();
 
-/* ---------------- CRYPTO TICKER (Top 20) ------------------ */
-const tickerRow = document.getElementById('tickerRow');
-
+/* ===== Price Ticker (Top 20) =====
+   Source: CoinGecko (public, no API key)
+*/
 async function loadTicker() {
   try {
-    const url =
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h';
-    const res = await fetchWithTimeout(url, { cache: 'no-store', timeout: 15000 });
-    if (!res.ok) throw new Error('Ticker request failed: ' + res.status);
+    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=1h,24h';
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Ticker fetch failed');
     const data = await res.json();
 
-    tickerRow.innerHTML = '';
-    for (const c of data) {
-      const item = document.createElement('div');
-      item.className = 'ti';
-      const chg = Number(c.price_change_percentage_24h || 0);
-      const chgClass = chg >= 0 ? 'up' : 'down';
-      item.innerHTML = `
-        <strong>${(c.symbol || '').toUpperCase()}</strong>
-        <span>$${Number(c.current_price || 0).toLocaleString()}</span>
-        <span class="chg ${chgClass}">${isFinite(chg) ? chg.toFixed(2) : '0.00'}%</span>
-      `;
-      tickerRow.appendChild(item);
-    }
+    const items = data.map(c => {
+      const delta = c.price_change_percentage_24h;
+      const cls = delta >= 0 ? 'ticker-up' : 'ticker-down';
+      return `<span class="ticker-item">
+        <img src="${c.image}" alt="${c.symbol}" width="18" height="18" style="border-radius:50%;"/>
+        <b>${c.symbol.toUpperCase()}</b> $${fmt(c.current_price, 4)}
+        <span class="${cls}">${delta ? delta.toFixed(2) : '0.00'}%</span>
+      </span>`;
+    });
+    // duplicate (for seamless looping)
+    $('#ticker').innerHTML = items.join('') + items.join('');
   } catch (e) {
-    console.error('Ticker error:', e);
-    tickerRow.textContent = 'Không tải được giá crypto.';
-  }
-}
-loadTicker();
-setInterval(loadTicker, 60 * 1000); // refresh mỗi phút
-
-/* -------------------- CRYPTO NEWS (4) --------------------- */
-const newsList = document.getElementById('newsList');
-const newsEmpty = document.getElementById('newsEmpty');
-const btnReload = document.getElementById('btnReloadNews');
-
-function renderNews(items) {
-  newsList.innerHTML = '';
-  if (!items || !items.length) {
-    newsEmpty.textContent = 'Không có tin tức phù hợp.';
-    newsEmpty.style.display = 'block';
-    newsList.appendChild(newsEmpty);
-    return;
-  }
-  for (const n of items) {
-    const card = document.createElement('article');
-    card.className = 'card glass news-card';
-    const t = n.time ? new Date(n.time).toLocaleString('vi-VN') : '';
-    card.innerHTML = `
-      ${n.img ? `<img src="${n.img}" alt="">` : ''}
-      <h4><a href="${n.url}" target="_blank" rel="noopener noreferrer">${n.title}</a></h4>
-      <div class="meta"><span>${n.source}</span> • <time>${t}</time></div>
-    `;
-    newsList.appendChild(card);
+    console.error(e);
+    $('#ticker').innerHTML = `<span class="ticker-item">Không tải được giá coin.</span>`;
   }
 }
 
-// Provider 1: CryptoCompare (thường cho CORS)
-async function providerCryptoCompare(limit = 4) {
-  const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
-  const r = await fetchWithTimeout(url, { cache: 'no-store', timeout: 12000 });
-  if (!r.ok) throw new Error('news provider 1 failed: ' + r.status);
-  const j = await r.json();
-  const items = (j?.Data || [])
-    .sort((a, b) => (b.published_on || 0) - (a.published_on || 0))
-    .slice(0, limit)
-    .map(n => ({
-      title: n.title,
-      url: n.url,
-      source: n.source_info?.name || 'CryptoCompare',
-      time: (n.published_on || 0) * 1000,
-      img: n.imageurl || ''
-    }));
-  return items;
-}
-
-// Provider 2: Coindesk qua rss2json fallback
-async function providerCoindesk(limit = 4) {
-  const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml';
-  const r = await fetchWithTimeout(url, { cache: 'no-store', timeout: 12000 });
-  if (!r.ok) throw new Error('news provider 2 failed: ' + r.status);
-  const j = await r.json();
-  const items = (j?.items || [])
-    .slice(0, limit)
-    .map(n => ({
-      title: n.title,
-      url: n.link,
-      source: 'CoinDesk',
-      time: Date.parse(n.pubDate || ''),
-      img: n.thumbnail || ''
-    }));
-  return items;
-}
-
-// Fallback cuối: tin mẫu tĩnh (đảm bảo UI hiển thị)
-function providerStatic(limit = 4) {
-  const now = Date.now();
-  const base = [
-    { title: 'BTC sideway, alt tăng nhẹ', url: '#', source: 'Local', time: now - 3600e3, img: '' },
-    { title: 'ETH gas giảm, NFT hồi phục', url: '#', source: 'Local', time: now - 2*3600e3, img: '' },
-    { title: 'Binance công bố chương trình Earn mới', url: '#', source: 'Local', time: now - 3*3600e3, img: '' },
-    { title: 'Solana hệ sinh thái mở rộng dApp', url: '#', source: 'Local', time: now - 4*3600e3, img: '' },
-  ];
-  return base.slice(0, limit);
-}
-
+/* ===== Crypto News (4 newest + hot flag) =====
+   Source: CryptoCompare top news (no API key)
+*/
 async function loadNews() {
-  newsEmpty.style.display = 'none';
+  const list = $('#news-list');
+  const empty = $('#news-empty');
+  empty.classList.add('hidden');
+  list.innerHTML = '';
+
   try {
-    const items = await providerCryptoCompare(4);
-    renderNews(items);
-  } catch (e1) {
-    console.warn('Provider1 failed → fallback', e1);
-    try {
-      const items = await providerCoindesk(4);
-      renderNews(items);
-    } catch (e2) {
-      console.warn('Provider2 failed → static', e2);
-      const items = providerStatic(4);
-      renderNews(items);
-    }
+    const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN', { cache: 'no-store' });
+    if (!res.ok) throw new Error('News fetch failed');
+    const json = await res.json();
+    const articles = (json?.Data || [])
+      .filter(a => a.title && a.url)
+      .sort((a,b) => b.published_on - a.published_on)  // newest
+      .slice(0, 4);                                    // only 4
+
+    if (!articles.length) throw new Error('No news');
+
+    const html = articles.map(a => {
+      const t = new Date(a.published_on * 1000);
+      const when = t.toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' });
+      const img = a.imageurl || 'https://cryptocompare.com/media/37746251/cryptocompare.png';
+      return `<article class="card news-card">
+        <img class="news-img" src="${img}" alt="">
+        <div>
+          <a href="${a.url}" target="_blank" rel="noopener">
+            <h3 style="margin:.2rem 0;">${clip(a.title, 120)}</h3>
+          </a>
+          <p class="muted" style="margin:.2rem 0;">${clip(a.body, 160)}</p>
+          <div class="news-meta">
+            <span class="badge-news">${a.source_info?.name || 'Source'}</span>
+            <span>${when}</span>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+
+    list.innerHTML = html;
+  } catch (e) {
+    console.error(e);
+    empty.classList.remove('hidden');
   }
 }
 
-btnReload?.addEventListener('click', loadNews);
+/* ===== Events ===== */
+$('#reloadNews').addEventListener('click', loadNews);
+
+/* ===== Boot ===== */
+loadTicker();
 loadNews();
+
+/* Refresh ticker every 60s */
+setInterval(loadTicker, 60_000);

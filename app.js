@@ -1,4 +1,4 @@
-// ===== Mobile menu (optional: nếu muốn mở menu phụ) =====
+// ===== Mobile menu =====
 const hamburger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 if (hamburger && menu){
@@ -10,22 +10,7 @@ if (hamburger && menu){
 // ===== Footer year =====
 document.getElementById('y').textContent = new Date().getFullYear();
 
-// ===== Copy helper (proxy) =====
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-copy]');
-  if (!btn) return;
-  const target = document.querySelector(btn.getAttribute('data-copy'));
-  if (!target) return;
-  const text = target.value || target.textContent || '';
-  navigator.clipboard.writeText(text.trim()).then(() => {
-    const prev = btn.textContent;
-    btn.textContent = 'Đã copy ✓';
-    setTimeout(() => (btn.textContent = prev), 1400);
-  });
-});
-
 // ===== LIVE TICKER: Top 20 (CoinGecko) =====
-// Không cần API key. Tự động refresh mỗi 60s
 const geckoURL =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=1h,24h,7d';
 
@@ -35,13 +20,11 @@ function fmt(n, d=2){
   if (n === null || n === undefined || isNaN(n)) return '-';
   return Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
 }
-
 function upDownClass(v){
   if (v > 0) return 'up';
   if (v < 0) return 'down';
   return '';
 }
-
 async function loadTicker(){
   try{
     const res = await fetch(geckoURL, { cache: 'no-store' });
@@ -60,8 +43,7 @@ async function loadTicker(){
       `;
     }).join('');
 
-    // duplicate once to create seamless loop
-    tickerEl.innerHTML = items + items;
+    tickerEl.innerHTML = items + items; // duplicate to loop mượt
   }catch(err){
     console.error(err);
     tickerEl.innerHTML = `<span class="ti"><b>Prices</b> đang tạm gián đoạn…</span>`;
@@ -70,10 +52,8 @@ async function loadTicker(){
 loadTicker();
 setInterval(loadTicker, 60_000);
 
-// ===== CRYPTO NEWS (CoinStats public API) =====
-// API không cần key, hỗ trợ CORS, có thumb & nguồn bài
+// ===== CRYPTO NEWS (CoinStats) =====
 const newsURL = 'https://api.coinstats.app/public/v1/news?skip=0&limit=18';
-
 const newsList = document.getElementById('news-list');
 const reloadNewsBtn = document.getElementById('reload-news');
 

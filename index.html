@@ -3,74 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TieuPhu — Modern Portfolio</title>
-  <meta name="description" content="TieuPhu • MMO • Tech • Portfolio" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #0b0f14; --panel:#0e121b; --card:#121826; --muted:#9fb0c7; --text:#e9f0ff;
-      --brand:#7c3aed; --brand-2:#22d3ee; --ring: 0 0 0 1px rgba(255,255,255,.06), 0 10px 30px rgba(124,58,237,.25);
-    }
-    [data-theme="light"]{ --bg:#f7f9fc; --panel:#ffffff; --card:#ffffff; --text:#0e1320; --muted:#54637a }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Manrope,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--text); background:var(--bg)}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.08); border-radius:20px; box-shadow:var(--ring)}
-    .hero{position:relative; overflow:hidden}
-    .hero-grid{display:grid; gap:28px; align-items:center; grid-template-columns:1.2fr .8fr}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-    .title{font-size:clamp(28px, 5vw, 56px); font-weight:800; line-height:1.05; letter-spacing:-.02em}
-    .gradient-text{background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
-    .lead{font-size:clamp(14px, 2.2vw,18px); color:var(--muted)}
-    .cta{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); font-weight:700}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#061120; border-color:transparent}
-    .avatar{width:160px;height:160px;border-radius:22px; border:1px solid rgba(255,255,255,.15); box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media(max-width:700px){.stats{grid-template-columns:1fr 1fr}}
-    .stat{padding:16px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.08); text-align:center}
-    .stat b{font-size:22px}
-    .section{margin-top:28px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media(max-width:900px){.grid-3{grid-template-columns:1fr 1fr}} @media(max-width:620px){.grid-3{grid-template-columns:1fr}}
-    .card{padding:18px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.08)}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04); font-weight:600}
-    .skills{display:flex;flex-wrap:wrap;gap:10px}
-    .footer{color:var(--muted);text-align:center;padding:24px}
-    /* animated blobs */
-    .blob{position:absolute;filter:blur(50px);opacity:.35;mix-blend-mode:screen}
-    .b1{top:-60px;left:-60px;width:300px;height:300px;background:#7c3aed;border-radius:40% 60% 60% 40%;animation:blob 12s ease-in-out infinite}
-    .b2{bottom:-80px;right:-80px;width:320px;height:320px;background:#22d3ee;border-radius:60% 40% 40% 60%;animation:blob 10s ease-in-out -3s infinite}
-    @keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-15px) scale(1.06)}}
-    /* theme toggle */
-    .toggle{position:fixed;right:18px;top:18px;z-index:9}
-  </style>
+
+  <title>TieuPhu — MMO • Tech • Automation</title>
+  <meta name="description" content="Portfolio của TieuPhu: MMO, Tech, Automation, workflow & sản phẩm web gọn nhẹ." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://<your-username>.github.io/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TieuPhu Portfolio" />
+  <meta property="og:title" content="TieuPhu — MMO • Tech • Automation" />
+  <meta property="og:description" content="Xây workflow số hoá, công cụ tự động hoá & web app tối giản." />
+  <meta property="og:url" content="https://<your-username>.github.io/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TieuPhu — MMO • Tech • Automation" />
+  <meta name="twitter:description" content="Xây workflow số hoá, automation & web nhanh." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" />
+
+  <!-- Structured data (Logo + WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Organization","name":"TieuPhu","url":"https://<your-username>.github.io/"},
+      {"@type":"WebSite","url":"https://<your-username>.github.io/","name":"TieuPhu Portfolio",
+       "potentialAction":{"@type":"SearchAction","target":"https://<your-username>.github.io/?q={search_term_string}","query-input":"required name=search_term_string"}}
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons (tuỳ chọn) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Security/csp gợi ý (thêm nếu cần) -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com"> -->
 </head>
 <body>
-  <button class="toggle btn" aria-label="Đổi theme" onclick="toggleTheme()">🌓 <span id="themeLabel">Dark</span></button>
+  <a class="skip-link" href="#main">Bỏ qua nội dung</a>
 
-  <main class="container">
+  <button class="toggle btn" aria-label="Đổi theme" id="themeToggle">🌓 <span id="themeLabel">Dark</span></button>
+
+  <main id="main" class="container">
     <!-- HERO -->
-    <section class="hero glass section">
-      <div class="b1 blob"></div><div class="b2 blob"></div>
-      <div class="hero-grid" style="position:relative; z-index:1; padding:28px">
+    <section class="hero glass section" aria-labelledby="hero-title">
+      <div class="b1 blob" aria-hidden="true"></div>
+      <div class="b2 blob" aria-hidden="true"></div>
+
+      <div class="hero-grid">
         <div>
-          <h1 class="title">Xin chào, mình là <span class="gradient-text">TieuPhu</span> 👋</h1>
-          <p class="lead">MMO • Tech • Automation. Mình theo đuổi triết lý <b>Smart Work &gt; Hard Work</b> — xây dựng các workflow số hoá, công cụ tự động hoá và sản phẩm web gọn nhẹ nhưng hiệu quả.</p>
-          <div class="cta" style="margin-top:14px">
+          <h1 id="hero-title" class="title">Xin chào, mình là <span class="gradient-text">TieuPhu</span> 👋</h1>
+          <p class="lead">
+            MMO • Tech • Automation. Mình theo đuổi triết lý <b>Smart Work &gt; Hard Work</b> — xây dựng workflow số hoá,
+            công cụ tự động hoá và sản phẩm web gọn nhẹ nhưng hiệu quả.
+          </p>
+          <div class="cta">
             <a class="btn primary" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">Xem GitHub</a>
             <a class="btn" href="#contact">Liên hệ</a>
           </div>
         </div>
-        <div style="justify-self:center">
-          <img class="avatar" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Avatar" loading="lazy"/>
+
+        <div class="hero-avatar">
+          <img class="avatar"
+               src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop"
+               alt="Ảnh đại diện"
+               loading="lazy"
+               width="160" height="160" />
         </div>
       </div>
-      <div class="stats" style="padding:0 28px 28px">
+
+      <div class="stats">
         <div class="stat"><b>10K+</b><div class="muted">Lines automated</div></div>
         <div class="stat"><b>20+</b><div class="muted">Projects</div></div>
         <div class="stat"><b>5yrs</b><div class="muted">Experience</div></div>
@@ -78,19 +91,20 @@
     </section>
 
     <!-- ABOUT + SKILLS -->
-    <section class="section grid-3">
+    <section class="section grid-3" aria-labelledby="about-title">
       <article class="card">
-        <h3>🙋‍♂️ Về mình</h3>
-        <p>Mình thích khám phá công nghệ, MMO và những cách sáng tạo để tối ưu công việc. Mỗi dòng code là một nét cọ trên canvas đổi mới ✨</p>
-        <div class="skills" style="margin-top:8px">
+        <h3 id="about-title">🙋‍♂️ Về mình</h3>
+        <p>Mình thích khám phá công nghệ, MMO và những cách sáng tạo để tối ưu công việc.</p>
+        <div class="skills">
           <span class="chip">Automation</span>
           <span class="chip">Web Scraping</span>
           <span class="chip">Blockchain</span>
           <span class="chip">Bots</span>
         </div>
       </article>
-      <article class="card">
-        <h3>🧰 Tech stack chính</h3>
+
+      <article class="card" aria-labelledby="stack-title">
+        <h3 id="stack-title">🧰 Tech stack chính</h3>
         <div class="skills">
           <span class="chip">JavaScript/TypeScript</span>
           <span class="chip">Node.js</span>
@@ -99,29 +113,32 @@
           <span class="chip">PHP</span>
           <span class="chip">Rust</span>
         </div>
-        <h4 style="margin:14px 0 6px">Đang mở rộng</h4>
+        <h4 class="subtle">Đang mở rộng</h4>
         <div class="skills">
           <span class="chip">C/C++</span>
           <span class="chip">C#</span>
           <span class="chip">Solana</span>
         </div>
       </article>
-      <article class="card">
-        <h3>📈 Live badges</h3>
-        <div style="display:grid;gap:8px">
-          <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=transparent&show_icons=true" alt="stats" loading="lazy"/>
-          <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=true" alt="streak" loading="lazy"/>
+
+      <article class="card" aria-labelledby="live-badges-title">
+        <h3 id="live-badges-title">📈 Live badges</h3>
+        <div class="badges">
+          <img src="https://github-readme-stats.vercel.app/api?username=nongdancryptos&theme=transparent&show_icons=true"
+               alt="GitHub stats" loading="lazy" width="600" height="200" />
+          <img src="https://streak-stats.demolab.com?user=nongdancryptos&theme=highcontrast&hide_border=true"
+               alt="GitHub streak" loading="lazy" width="600" height="200" />
         </div>
       </article>
     </section>
 
-    <!-- PROJECTS (sample) -->
-    <section class="section">
-      <h2 style="margin:6px 0 14px">🚀 Dự án nổi bật</h2>
+    <!-- PROJECTS -->
+    <section class="section" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">🚀 Dự án nổi bật</h2>
       <div class="grid-3">
         <a class="card" href="https://nongdancryptos.github.io" target="_blank" rel="noopener">
           <h4>Flynn Docs</h4>
-          <p class="muted">Tài liệu & ghi chú kỹ thuật được build tĩnh, tải siêu nhanh.</p>
+          <p class="muted">Tài liệu & ghi chú kỹ thuật build tĩnh, tải siêu nhanh.</p>
         </a>
         <a class="card" href="https://prepverse.vercel.app" target="_blank" rel="noopener">
           <h4>PrepVerse</h4>
@@ -135,48 +152,45 @@
     </section>
 
     <!-- SUPPORT -->
-    <section class="section">
-      <h2>☕ Ủng hộ</h2>
+    <section class="section" aria-labelledby="support-title">
+      <h2 id="support-title" class="section-title">☕ Ủng hộ</h2>
       <div class="grid-3">
-        <a class="card" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener"><b>Buy me a coffee</b><p class="muted">ko-fi.com/tieuphu</p></a>
-        <a class="card" href="https://paypal.me/hungsyn" target="_blank" rel="noopener"><b>PayPal</b><p class="muted">paypal.me/hungsyn</p></a>
+        <a class="card" href="https://ko-fi.com/tieuphu" target="_blank" rel="noopener">
+          <b>Buy me a coffee</b>
+          <p class="muted">ko-fi.com/tieuphu</p>
+        </a>
+        <a class="card" href="https://paypal.me/hungsyn" target="_blank" rel="noopener">
+          <b>PayPal</b>
+          <p class="muted">paypal.me/hungsyn</p>
+        </a>
         <div class="card">
           <b>Crypto</b>
-          <p class="muted" style="word-break:break-all">ETH/POL: 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</p>
-          <p class="muted" style="word-break:break-all">BTC: bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</p>
+          <p class="muted wrap">ETH/POL: 0xf56d2ab9c35cd51dd5366b96fe7622d99de06458</p>
+          <p class="muted wrap">BTC: bc1qzgk2tc0ujezgredxwx0gd6ykmcdff94azfnvj5</p>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section glass" style="padding:18px 24px">
-      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
-        <h2 style="margin:0">📬 Liên hệ</h2>
-        <div class="skills">
+    <section id="contact" class="section glass contact" aria-labelledby="contact-title">
+      <div class="contact-row">
+        <h2 id="contact-title" class="section-title">📬 Liên hệ</h2>
+        <nav class="skills" aria-label="Liên hệ nhanh">
           <a class="chip" href="mailto:nongdancryptos@gmail.com">Gmail</a>
-          <a class="chip" href="https://t.me/TieuPhuOnTop" target="_blank">Telegram</a>
-          <a class="chip" href="https://x.com/OnTopAirdrop" target="_blank">X</a>
-          <a class="chip" href="https://github.com/nongdancryptos" target="_blank">GitHub</a>
-        </div>
+          <a class="chip" href="https://t.me/TieuPhuOnTop" target="_blank" rel="noopener">Telegram</a>
+          <a class="chip" href="https://x.com/OnTopAirdrop" target="_blank" rel="noopener">X</a>
+          <a class="chip" href="https://github.com/nongdancryptos" target="_blank" rel="noopener">GitHub</a>
+        </nav>
       </div>
     </section>
 
-    <p class="footer">© <span id="y"></span> TieuPhu • làm nhẹ, chạy nhanh ⚡</p>
+    <p class="footer">© <span id="year"></span> TieuPhu • làm nhẹ, chạy nhanh ⚡</p>
   </main>
 
-  <script>
-    // theme toggle
-    const root = document.documentElement;
-    const label = document.getElementById('themeLabel');
-    function setTheme(mode){
-      document.documentElement.setAttribute('data-theme', mode);
-      localStorage.setItem('theme', mode);
-      label && (label.textContent = mode === 'dark' ? 'Dark' : 'Light');
-    }
-    function toggleTheme(){ setTheme((document.documentElement.getAttribute('data-theme')==='dark')?'light':'dark'); }
-    (function(){ setTheme(localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')); })();
-    // year
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <!-- Scripts -->
+  <script src="./app.js" defer></script>
+  <!-- Analytics gợi ý:
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>/* init GA */</script> -->
 </body>
 </html>
